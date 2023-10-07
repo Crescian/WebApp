@@ -384,23 +384,100 @@ if (!isset($_GET['app_id'])) {
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mb-5" id="priority_urgent_section">
+                                </div>
+                                <div class="col-sm d-flex justify-content-center">
+                                    <hr color="red" size="2" width="15%" align="center">
+                                    <span class="fw-bold text-danger">ACCESS</span>
+                                    <hr color="red" size="2" width="85%" align="center">
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm">
                                         <div class="form-check">
-                                            <span class="input-group-text text-bg-danger"><i class="fa-solid fa-people-roof"></i></span>
+                                            <input class="form-check-input" type="radio" name="access" id="access1" value="New" checked>
+                                            <label class="form-check-label fw-bold" for="access1">
+                                                New
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="access" id="access2" value="Additional">
+                                            <label class="form-check-label fw-bold" for="access2">
+                                                Additional
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="access" id="access3" value="Change">
+                                            <label class="form-check-label fw-bold" for="access3">
+                                                Change
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm d-flex justify-content-center">
+                                    <hr color="red" size="2" width="15%" align="center">
+                                    <span class="fw-bold text-danger">PRIORITY</span>
+                                    <hr color="red" size="2" width="85%" align="center">
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm">
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="priority" id="priority1" value="Urgent" checked>
                                             <label class="form-check-label fw-bold" for="priority1">
                                                 Urgent
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mb-5" id="priority_urgent_section">
-                                        <label for="priority" class="form-label fw-bold">Priority:</label>
+                                    <div class="col-sm">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="priority" id="priority2" value="For Scheduling">
                                             <label class="form-check-label fw-bold" for="priority2">
                                                 For Scheduling
                                             </label>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="domainAccount">
+                                            <label class="form-check-label fw-bold" for="domainAccount">
+                                                Domain Account
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" type="checkbox" id="mail_account" value="">
+                                        </div>
+                                        <input type="text" class="form-control" id="mail_account_input" placeholder="Mail Account" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" type="checkbox" id="file_storage_access" value="">
+                                        </div>
+                                        <input type="text" class="form-control" id="file_storage_access_input" placeholder="File Storage Access" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" type="checkbox" id="in_house_access" value="">
+                                        </div>
+                                        <input type="text" class="form-control" id="in_house_access_input" placeholder="In House Access" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text fw-bold">Purpose:</span>
+                                        <input type="text" class="form-control" id="purpose">
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
 
