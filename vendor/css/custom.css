@@ -1,0 +1,1597 @@
+/* ========== BODY BACKGROUND COLOR BY JM ACUISA - 01-11-23 10:58AM  ========== */
+body {
+  /* background-color: #f6f9ff; */
+  background-color: #d6d6d6;
+}
+
+/* ==========  PAGE ANIMATION ON LOAD BY JM ACUISA - 01-11-23 10:59AM  ========== */
+.fade-page {
+  animation: fade 0.1s ease-in;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* LLOYD'S CSS DATE 01/11/23*/
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../Fonts/Poppins.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+/* PERSONALIZATION CUSTOM SOURCE BORROWED BY LLOYD DATE 01/11/2023 */
+/* =========== Align table body data to middle center =========== */
+table.dataTable tbody th.dt-body-middle-center,
+table.dataTable tbody td.dt-body-middle-center {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* =========== Align table body data to middle right =========== */
+table.dataTable tbody th.dt-body-middle-right,
+table.dataTable tbody td.dt-body-middle-right {
+  vertical-align: middle;
+  text-align: right;
+}
+
+/* =========== Align table body data to middle left =========== */
+table.dataTable tbody th.dt-body-middle-left,
+table.dataTable tbody td.dt-body-middle-left {
+  vertical-align: middle;
+  text-align: left;
+}
+/* =========== Align table body data no wrap =========== */
+table.dataTable th.dt-nowrap-center,
+table.dataTable td.dt-nowrap-center {
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* =========== Custom badge color =========== */
+.badge.bg-blue {
+  background-color: #0d6efd;
+}
+
+.badge.bg-indigo {
+  background-color: #6610f2;
+}
+
+.badge.bg-purple {
+  background-color: #6f42c1;
+}
+
+.badge.bg-pink {
+  background-color: #d63384;
+}
+
+.badge.bg-red {
+  background-color: #dc3545;
+}
+
+.badge.bg-orange {
+  background-color: #fd7e14;
+}
+
+.badge.bg-yellow {
+  background-color: #ffc107;
+}
+
+.badge.bg-green {
+  background-color: #198754;
+}
+
+.badge.bg-teal {
+  background-color: #20c997;
+}
+
+.badge.bg-cyan {
+  background-color: #0dcaf0;
+}
+
+.badge.date-color2 {
+  background-color: #36b9cc;
+}
+
+.badge.date-color5 {
+  background-color: #198754;
+}
+
+.badge.date-color7 {
+  background-color: #57b846;
+}
+
+.badge.date-color14 {
+  background-color: fuchsia;
+}
+
+.badge.date-color16 {
+  background-color: navy;
+}
+
+/* =========== Custom date color =========== */
+/* PERSONALIZATION CUSTOM SOURCE BORROWED BY LLOYD DATE 01/11/2023 */
+/* TREE VIEW CSS IN MAIN MENU MODULE */
+/* li {
+  list-style-type: none;
+  font-size: 20px;
+} */
+.rightAngle::before {
+  content: "\25b6";
+  display: inline-block;
+  font-size: 10px;
+  color: #777676;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+  transition: 0.2s ease-out;
+}
+
+.nested {
+  padding-left: 55px;
+  display: none;
+}
+
+.nested.active {
+  display: block;
+}
+
+.angleDown::before {
+  transform: rotate(90deg);
+  transition: 0.2s ease-out;
+}
+
+#announcement_profile_image {
+  margin-left: -195px;
+}
+
+.announcement_username {
+  color: #585858;
+  font-family: Poppins-Regular;
+  position: absolute;
+  margin-left: 80px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.announcement_profile_position {
+  margin-left: 50px;
+}
+
+.box {
+  margin-left: 0.5%;
+  width: 100%;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #c0c0c0;
+  /* transition: 1s; */
+}
+
+.post_icon_image {
+  width: 60px;
+  height: 30;
+}
+
+.post_icon_image:hover {
+  background-color: #e8e8e8;
+  border-radius: 50%;
+}
+
+.post_icon_image i {
+  margin-left: 12px;
+}
+
+/* TREE VIEW CSS IN MAIN MENU MODULE */
+.rightAngle::before {
+  content: "\25b6";
+  display: inline-block;
+  font-size: 10px;
+  color: #777676;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.nested {
+  padding-left: 55px;
+  display: none;
+}
+
+.nested.active {
+  display: block;
+}
+
+.angleDown::before {
+  transform: rotate(90deg);
+  transition: 0.2s ease-out;
+}
+
+.announcement-section .card:hover {
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  transform: scale(1.1) rotate(-3deg);
+  z-index: 1;
+}
+
+/* TREE VIEW CSS IN MAIN MENU MODULE */
+/* IMAGE CSS IN LANDING PAGE BY LLOYD DATE 01/11/23 */
+#post_image {
+  margin: 0;
+  width: auto;
+  height: 300px;
+}
+
+/* IMAGE CSS IN LANDING PAGE BY LLOYD DATE 01/11/23 */
+/* IMAGE CSS IN ANNOUNCEMENT FUNCTION BY LLOYD DATE 01/11/23 */
+#add_announcement_image {
+  width: 350px;
+  height: 350px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
+/* IMAGE CSS IN ANNOUNCEMENT FUNCTION BY LLOYD DATE 01/11/23 */
+/* IMAGE CSS IN USER ACCOUNT FUNCTION BY LLOYD DATE 01/11/23 */
+#add_user_image {
+  width: 350px;
+  height: 350px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
+/* IMAGE CSS IN USER ACCOUNT FUNCTION BY LLOYD DATE 01/11/23 */
+/* IMAGE CSS IN ANNOUNCEMENT MODULE BY LLOYD DATE 01/11/23 */
+#upload_image {
+  width: 300px;
+  height: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* IMAGE CSS IN ANNOUNCEMENT MODULE BY LLOYD DATE 01/11/23 */
+/* IMAGE CSS IN ANNOUNCEMENT MODULE FOR PROFILE PICTURE BY LLOYD DATE 01/11/23 */
+#profile_image {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
+/* IMAGE CSS IN ANNOUNCEMENT MODULE FOR PROFILE PICTURE BY LLOYD DATE 01/11/23 */
+/* DIVISION ON ANNOUNCEMENT MODAL USES ON ANNOUNCEMENT BODY BY LLOYD DATE 01/11/23 */
+.announce-body {
+  width: 100%;
+  height: 700px;
+  background-color: transparent;
+  overflow: auto;
+}
+
+/* DIVISION ON ANNOUNCEMENT MODAL USES ON ANNOUNCEMENT BODY BY LLOYD DATE 01/11/23 */
+/* SCROLL UP IN ANNOUNCEMENT ON LANDING PAGE SIDE BY LLOYD DATE 01/11/23 */
+/* .to-top {
+        display: flex;
+        position: relative;
+        background: white;
+        bottom: 16px;
+        margin-left: 100px;
+        right: 32px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        color: #1f1f1f;
+        text-decoration: none;
+        opacity: 1;
+        pointer-events: none;
+        transition: all 0.4s;
+        z-index: 1000;
+    }
+
+    .to-top.active {
+        bottom: 32px;
+        pointer-events: auto;
+        opacity: 1;
+    } */
+
+.to-top {
+  display: flex;
+  position: fixed;
+  background: white;
+  bottom: 16px;
+  margin-left: 100px;
+  right: 32px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #1f1f1f;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s;
+  z-index: 1000;
+}
+
+.to-top.active {
+  bottom: 32px;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* SCROLL UP IN ANNOUNCEMENT ON LANDING PAGE SIDE BY LLOYD DATE 01/11/23 */
+
+/* =========== Perso Monitoring Dashboard - Justine 01112023 =========== */
+/* =========== Cards =========== */
+.text-gray-100 {
+  color: #f8f9fc !important;
+}
+
+.text-gray-200 {
+  color: #eaecf4 !important;
+}
+
+.text-gray-300 {
+  color: #dddfeb !important;
+}
+
+.text-gray-400 {
+  color: #d1d3e2 !important;
+}
+
+.text-gray-500 {
+  color: #b7b9cc !important;
+}
+
+.text-gray-600 {
+  color: #858796 !important;
+}
+
+.text-gray-700 {
+  color: #6e707e !important;
+}
+
+.text-gray-800 {
+  color: #5a5c69 !important;
+}
+
+.text-gray-900 {
+  color: #3a3b45 !important;
+}
+
+.border-left-primary {
+  border-left: 0.25rem solid #4e73df !important;
+}
+
+.border-bottom-primary {
+  border-bottom: 0.25rem solid #4e73df !important;
+}
+
+.border-left-secondary {
+  border-left: 0.25rem solid #858796 !important;
+}
+
+.border-bottom-secondary {
+  border-bottom: 0.25rem solid #858796 !important;
+}
+
+.border-left-success {
+  border-left: 0.25rem solid #1cc88a !important;
+}
+
+.border-bottom-success {
+  border-bottom: 0.25rem solid #1cc88a !important;
+}
+
+.border-left-info {
+  border-left: 0.25rem solid #36b9cc !important;
+}
+
+.border-bottom-info {
+  border-bottom: 0.25rem solid #36b9cc !important;
+}
+
+.border-left-warning {
+  border-left: 0.25rem solid #f6c23e !important;
+}
+
+.border-bottom-warning {
+  border-bottom: 0.25rem solid #f6c23e !important;
+}
+
+.border-left-danger {
+  border-left: 0.25rem solid #e74a3b !important;
+}
+
+.border-bottom-danger {
+  border-bottom: 0.25rem solid #e74a3b !important;
+}
+
+.border-left-light {
+  border-left: 0.25rem solid #f8f9fc !important;
+}
+
+.border-bottom-light {
+  border-bottom: 0.25rem solid #f8f9fc !important;
+}
+
+.border-left-dark {
+  border-left: 0.25rem solid #5a5c69 !important;
+}
+
+.border-bottom-dark {
+  border-bottom: 0.25rem solid #5a5c69 !important;
+}
+
+/* =========== Custom Card Header Hover - Justine 01112023 =========== */
+.card-body-hover-pointer:hover {
+  cursor: pointer;
+  background-color: #c7c7c7; /* =========== Added - Justine 01212023 =========== */
+}
+
+/* =========== Custom Header CSS - Justine 01112023 =========== */
+.custom-header-color {
+  background: #e0e0e0;
+}
+
+/* =========== Custom Page Title Perso CSS - Justine 01112023 =========== */
+.page-title-perso {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(to bottom right, #6a11fa, #7d85ce);
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* =========== Custom Page Title IT CSS - Jm 012123 =========== */
+.page-title-it {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(to bottom right, #fa3c3c, #aa0000);
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* =========== Custom Page Title Admin CSS - Lloyd 011323 =========== */
+.page-title-admin {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to bottom right,
+    #ff029e -22.01%,
+    #bf19ce 125.61%
+  );
+  border-radius: 10px;
+  color: #fff;
+}
+
+.page-title-physical {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(to bottom right, #d6b80f, #ff7a00);
+  border-radius: 10px;
+  color: #fff;
+}
+/* =========== Production page title CSS - Justine 03032023 =========== */
+.page-title-production {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to bottom right,
+    #291af5 -18.72%,
+    #3a329c 120.42%
+  );
+  border-radius: 10px;
+  color: #fff;
+}
+/* =========== IMS Express page title CSS - Justine 03032023 =========== */
+.page-title-ims {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to bottom right,
+    #b811da -18.72%,
+    #f756e1 120.42%
+  );
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* =========== Info Security page title CSS - Justine 03092023 =========== */
+.page-title-infosec {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to bottom right,
+    #1100ff -18.72%,
+    #ff0000 120.42%
+  );
+  border-radius: 10px;
+  color: #fff;
+}
+/* =========== Human Resources page title CSS - Justine 03032023 =========== */
+.page-title-humanresources {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to bottom right,
+    #291af5 -18.72%,
+    #3a329c 120.42%
+  );
+  border-radius: 10px;
+  color: #fff;
+}
+/* =========== Dispatch Ongoing Dashboard CSS - Justine 01122023 =========== */
+.dispatch_ongoing_list {
+  overflow: scroll;
+}
+
+.dispatch_ongoing_ul {
+  list-style: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.dispatch_ongoing_li {
+  background: linear-gradient(to bottom right, #6a11fa, #7d85ce);
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.dispatch_ongoing_status {
+  color: #00ff0a;
+}
+
+.dispatch_ongoing_jo,
+.dispatch_ongoing_filename {
+  color: #fff;
+}
+
+/* =========== Dispatch Ongoing Dashboard CSS End =========== */
+
+/* =========== Custom Table Header Admin - Justine 01122023 =========== */
+.customHeaderAdmin {
+  /* background: linear-gradient(to bottom right, #6a11fa, #7d85ce);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #5721af;
+  color: var(--bs-table-color);
+}
+
+/* =========== Custom Table Header Operator - Justine 01122023 =========== */
+.customHeaderOperator {
+  /* background: linear-gradient(to bottom right, #6a11fa, #7d85ce);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #6a11fa;
+  color: var(--bs-table-color);
+}
+/* =========== Custom Table Header Production - Justine 03032023 =========== */
+.customHeaderProd {
+  /* background: linear-gradient(to bottom right, #291af5, #3a329c);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #291af5;
+  color: var(--bs-table-color);
+}
+/* =========== Custom Table Header ITAsset - Justine 04292023 =========== */
+.customHeaderItAsset {
+  /* background: linear-gradient(to bottom right, #fa3c3c, #aa0000);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #fa3c3c;
+  color: var(--bs-table-color);
+}
+/* =========== Custom Table Header Notification - Justine 04292023 =========== */
+.customHeaderNotification {
+  /* background: linear-gradient(to right, #1f2f98 -22.01%, #4adede 125.61%);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #1f2f98;
+  color: var(--bs-table-color);
+}
+.customHeaderNotif {
+  background: linear-gradient(to right, #1f2f98 -22.01%, #4adede 125.61%);
+  color: #fff;
+}
+/* =========== Custom Table Header Notification - Justine 04292023 =========== */
+.customHeaderInfoSec {
+  /* background: linear-gradient(to right, #1f2f98 -22.01%, #4adede 125.61%);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #2e078a;
+  color: var(--bs-table-color);
+}
+/* =========== Custom Table Header Human Resources - Justine 08152023 =========== */
+.customHeaderHR {
+  /* background: linear-gradient(to bottom right, #291af5, #3a329c);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #291af5;
+  color: var(--bs-table-color);
+}
+
+/* =========== Change Scrollbar Style =========== ON ANNOUNCEMENT DIVISION BY LLOYD DATE 1/13/2023*/
+.announce-body::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+.announce-body::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 238, 6);
+  border-radius: 100vw;
+}
+
+/* =========== Custom Table Header User Admin - Justine 09132023 ===========  */
+.customHeaderUserAdmin {
+  --bs-table-color: #fff;
+  --bs-table-bg: #ff029e;
+  color: var(--bs-table-color);
+}
+
+.custom_table_text_color_admin {
+  color: #eb0b95;
+}
+
+/* =========== Change Scrollbar Style for Administrator Module BY LLOYD DATE 01/14/2023 ===========*/
+.scroll_color_admin::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+.scroll_color_admin::-webkit-scrollbar-thumb {
+  background-color: #eb0b95;
+  border-radius: 100vw;
+}
+
+/* ANNOUNCEMENT MODULE MODAL CONTAINER BY LLOYD DATE 01/14/2023 */
+.announcement-container-modal {
+  margin: 0;
+}
+
+.announce-body-modal {
+  margin: 0;
+  padding: 20px;
+}
+
+.announcement-container-modal .image-announcement-container {
+  border: 2px solid;
+}
+
+/* =========== Custom badge color - Justine 01162023 =========== */
+.badge.bg-blue {
+  background-color: #0d6efd;
+}
+
+.badge.bg-indigo {
+  background-color: #6610f2;
+}
+
+.badge.bg-purple {
+  background-color: #6f42c1;
+}
+
+.badge.bg-pink {
+  background-color: #d63384;
+}
+
+.badge.bg-red {
+  background-color: #dc3545;
+}
+
+.badge.bg-orange {
+  background-color: #fd7e14;
+}
+
+.badge.bg-yellow {
+  background-color: #ffc107;
+}
+
+.badge.bg-green {
+  background-color: #198754;
+}
+
+.badge.bg-teal {
+  background-color: #20c997;
+}
+
+.badge.bg-cyan {
+  background-color: #0dcaf0;
+}
+
+/* =========== Custom date color - Justine 01162023  =========== */
+.badge.date-color1 {
+  background-color: #333333;
+}
+
+.badge.date-color2 {
+  background-color: #36b9cc;
+}
+
+.badge.date-color3 {
+  background-color: #4158d0;
+}
+
+.badge.date-color4 {
+  background-color: #6b6bf0;
+}
+
+.badge.date-color5 {
+  background-color: #198754;
+}
+
+.badge.date-color6 {
+  background-color: #1cc88a;
+}
+
+.badge.date-color7 {
+  background-color: #57b846;
+}
+
+.badge.date-color8 {
+  background-color: #5a5c69;
+}
+
+.badge.date-color9 {
+  background-color: #999999;
+}
+
+.badge.date-color10 {
+  background-color: #20b2aa;
+}
+
+.badge.date-color11 {
+  background-color: brown;
+}
+
+.badge.date-color12 {
+  background-color: darkgoldenrod;
+}
+
+.badge.date-color13 {
+  background-color: darksalmon;
+}
+
+.badge.date-color14 {
+  background-color: fuchsia;
+}
+
+.badge.date-color15 {
+  background-color: indianred;
+}
+
+.badge.date-color16 {
+  background-color: navy;
+}
+
+.badge.date-color17 {
+  background-color: dodgerblue;
+}
+
+.badge.date-color18 {
+  background-color: darkolivegreen;
+}
+
+.badge.date-color19 {
+  background-color: darkcyan;
+}
+
+.badge.date-color20 {
+  background-color: darkkhaki;
+}
+
+.badge.date-color21 {
+  background-color: #5f9ea0;
+}
+
+.badge.date-color22 {
+  background-color: midnightblue;
+}
+
+.badge.date-color23 {
+  background-color: sienna;
+}
+
+.badge.date-color24 {
+  background-color: rgb(31, 148, 136);
+}
+
+.badge.date-color25 {
+  background-color: rgb(134, 81, 134);
+}
+
+.badge.date-color26 {
+  background-color: tomato;
+}
+
+.badge.date-color27 {
+  background-color: firebrick;
+}
+
+.badge.date-color28 {
+  background-color: #836a49;
+}
+
+.badge.date-color29 {
+  background-color: peru;
+}
+
+.badge.date-color30 {
+  background-color: rgb(100, 69, 27);
+}
+
+.badge.date-color31 {
+  background-color: cornflowerblue;
+}
+
+/* See More And See Less CSS BY LLOYD DATE 01/18/2023 */
+.allignCenterSeeMore {
+  align-items: center;
+}
+
+.seeMoreSeeless {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.seeMoreSeeless:hover {
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  transform: scale(1.1) rotate(3deg);
+  z-index: 1;
+}
+.card_hover:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.card_hover.active {
+  box-shadow: 10px 10px 8px #888888 !important;
+}
+
+/* Header Color And Text Color for Physical Security Module BY LLOYD DATE 01/18/2023 */
+.custom_table_header_color_physical {
+  /* background: linear-gradient(to bottom right, #ffd900, #ff7a00);
+  color: #fff; */
+  --bs-table-color: #fff;
+  --bs-table-bg: #ff7a00;
+  color: var(--bs-table-color);
+}
+
+/* =========== Change Nav Link Custom Color in Admin dashboard - Justine 01/23/23 =========== */
+.nav-tabs .nav-item .nav-link.nav-link-custom.active {
+  background: linear-gradient(
+    to bottom right,
+    #6a11fa -22.01%,
+    #7d85ce 125.61%
+  );
+  color: #fff;
+}
+/* =========== Override Bootstrap Dropdown - Justine 01/23/23 =========== */
+.dropdown {
+  z-index: 2;
+}
+
+/* =========== Change Nav Link Custom Color in Notification Module - Crescian 08/10/23 =========== */
+.nav-tabs .nav-item .nav-link.nav-link-notification.active {
+  background: linear-gradient(
+    to bottom right,
+    #1f2f98 -22.01%,
+    #4393df 125.61%
+  );
+  /* background: linear-gradient(
+    to bottom right,
+    #6a11fa -22.01%,
+    #7d85ce 125.61%
+  ); */
+  color: #fff;
+}
+/* =========== Change Nav Link Custom Color in Manufacturing planner/operations - Justine 032423 =========== */
+.nav-tabs .nav-item .nav-link.nav-link-prod.active {
+  background: linear-gradient(
+    to bottom right,
+    #291af5 -18.72%,
+    #3a329c 120.42%
+  );
+  color: #fff;
+}
+/* =========== Change Nav Link Custom Color in User administrator - Justine 09132023 =========== */
+.nav-tabs .nav-item .nav-link.nav-link-user.active {
+  background: linear-gradient(
+    to bottom right,
+    #ff029e -22.01%,
+    #bf19ce 125.61%
+  );
+  color: #fff;
+}
+/* =========== Change Nav Link Custom Color in IMS EXpress - Justine 050923 =========== */
+.nav-tabs .nav-item .nav-link.nav-link-ims.active {
+  background: linear-gradient(
+    to bottom right,
+    #b811da -18.72%,
+    #f756e1 120.42%
+  );
+  color: #fff;
+}
+
+/* =========== Change Nav Link Custom Color in Notification - Lloyd 080523 =========== */
+.nav-tabs .nav-item .nav-link.nav-link-notif.active {
+  background: linear-gradient(
+    to bottom right,
+    #1f2f98 -22.01%,
+    #4393df 125.61%
+  );
+  color: #fff;
+}
+
+/* =========== Align data to middle center - Justine 01252023 =========== */
+.vertical-mid-center {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* =========== Align data to middle right - Justine 01252023 =========== */
+.vertical-mid-right {
+  vertical-align: middle;
+  text-align: right;
+}
+
+/* =========== Align data to middle left - Justine 01252023 =========== */
+.vertical-mid-left {
+  vertical-align: middle;
+  text-align: left;
+}
+/* =========== CMS Expected Courier Image container - Justine 01272023 =========== */
+.section_courier {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card_courier {
+  position: relative;
+  background: #e6e6e6;
+  border-radius: 20px;
+  margin: 20px 0;
+  width: 325px;
+}
+
+.card_courier::before {
+  content: "";
+  position: absolute;
+  height: 55%;
+  width: 100%;
+  background: #6a11fa;
+  border-radius: 20px 20px 0 0;
+}
+
+.card_courier .card_content_courier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+  z-index: 100;
+}
+.section_courier .card_courier .image_courier {
+  height: 225px;
+  width: 225px;
+  border-radius: 50%;
+  padding: 3px;
+  background: #6a11fa;
+}
+.section_courier .card_courier .image_courier img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+.card_courier .authorize_courier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  color: #333;
+}
+.authorize_courier .authorize_name {
+  font-size: 23px;
+  font-weight: 600;
+}
+.authorize_courier .authorize_company,
+.authorize_courier .authorize_courier_type {
+  font-size: 15px;
+  font-weight: 500;
+}
+.authorize_courier .authorize_file_pickup {
+  font-size: 18px;
+  font-weight: 600;
+}
+.authorize_courier .authorize_dr_number {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* =========== perso operator module custom modal width - Justine 01282023 =========== */
+.modal-xxl {
+  max-width: 1440px;
+}
+/* =========== ADMINISTRATOR Employee Signature Image container - Justine 02042023 =========== */
+#employee_signature_image {
+  height: 200px;
+  width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* =========== USER ACCESS SLIDER - Justine 03192023 =========== */
+.user_slider_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide-container {
+  max-width: 1350px;
+  width: 100%;
+  padding: 40px 0;
+}
+.access_user_card {
+  width: 350px;
+  border-radius: 25px;
+  background-color: #dddddd;
+}
+.access_user_title,
+.user_access_card_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+}
+.user_access_card_content ul li {
+  font-size: 19px;
+}
+.access_user_title {
+  position: relative;
+  row-gap: 5px;
+  padding: 25px 0;
+}
+.access_user_overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #eb0b95;
+  border-radius: 25px 25px 0 0;
+}
+.access_user_overlay h4 {
+  text-align: center;
+  padding-top: 10px;
+  color: #fff;
+}
+/* =========== Hidden Column on DataTable Without removing DOM - Justine 03312023 =========== */
+.hide_column_datable {
+  display: none;
+}
+/* =========== USER PROFILE CARD LIST CSS - Justine 04262023 =========== */
+.user_profile_section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user_profile_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 370px;
+  width: 100%;
+  background-color: #dfdfdf;
+  border-radius: 24px;
+  padding: 25px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.user_profile_card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 36%;
+  width: 100%;
+  background-color: #eb0b95;
+  border-radius: 24px 24px 0 0;
+}
+.user_profile_image {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #eb0b95;
+  padding: 3px;
+  margin-bottom: 10px;
+}
+.user_profile_image .user_profile_image-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+.user_profile_card .user_profile_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+  margin-bottom: 15px;
+}
+.user_profile_info .user_profile_name {
+  font-size: 20px;
+  font-weight: 500;
+}
+.user_profile_info .user_profile_job_title {
+  font-size: 14px;
+  font-weight: 500;
+}
+.user_profile_card .user_profile_actions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.user_profile_actions .badge {
+  font-size: 15px;
+  width: 250px;
+}
+.user_profile_card .user_profile_buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+.user_profile_buttons .btn {
+  margin: 0 3px;
+  padding: 8px 24px;
+  width: 120px;
+  border: none;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+/* =========== USER PROFILE CSS - Justine 04272023 =========== */
+.profile_user_container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.profile_user_image {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #eb0b95;
+  padding: 3px;
+  margin-bottom: 10px;
+}
+.profile_user_image .profile_user_image_img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+.profile_user_container .profile_user_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+  margin-bottom: 15px;
+}
+.profile_user_info .profile_user_name {
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile_user_info .profile_user_job_position {
+  font-size: 14px;
+  font-weight: 500;
+}
+/* =========== IMS USER PROFILE CSS - Justine 05082023 =========== */
+.ims_user_image_container {
+  height: 250px;
+  width: 250px;
+  position: relative;
+  border: 5px solid #b811da;
+  border-radius: 50%;
+  background-size: 100% 100%;
+  margin: 15px auto;
+  overflow: hidden;
+}
+.ims_user_image {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+}
+.ims_upload_user_pic {
+  position: absolute;
+  bottom: 0;
+  outline: none;
+  color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 102px;
+  cursor: pointer;
+  transition: 0.5s;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+}
+.ims_upload_user_pic::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.ims_upload_user_pic::before {
+  font: var(--fa-font-solid);
+  content: "\f030";
+  color: #1f1f1f;
+  font-size: 40px;
+  display: inline-block;
+  user-select: none;
+}
+.ims_upload_user_pic::after {
+  content: "Upload";
+  font-family: "Arial Narrow";
+  font-weight: bold;
+  color: #fff;
+  display: block;
+  top: 50px;
+  font-size: 14px;
+  position: absolute;
+}
+.ims_upload_user_pic:hover {
+  opacity: 1;
+}
+/* =========== NOTIFICATION CSS - Justine 06022023 =========== */
+.btn-back {
+  text-decoration: none;
+  color: #212529;
+  font-weight: bold;
+  padding: 0 5px;
+}
+.notification-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  font-weight: bold;
+  position: relative;
+}
+.notification-nav .notification-nav-link {
+  display: block;
+  color: #212529;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+.notification-nav .notification-nav-link.active {
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #4adede -22.01%, #1f2f98 125.61%);
+  color: white;
+}
+.notification-nav .notification-nav-link:hover:not(.active) {
+  border-left: 5px solid #1f2f98;
+  color: #1f2f98;
+  transition: all 0.05s;
+}
+.notification-nav-link:hover {
+  cursor: pointer;
+}
+/* lloyd css stepper */
+.step-wizard-list {
+  color: #333;
+  list-style-type: none;
+  display: flex;
+  padding: 20px 10px;
+  position: relative;
+  z-index: 10;
+}
+
+.step-wizard-item {
+  padding: 0 20px;
+  flex-basis: 0;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-width: 170px;
+  position: relative;
+}
+.step-wizard-item + .step-wizard-item:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 19px;
+  background: #21d4fd;
+  width: 100%;
+  height: 2px;
+  transform: translateX(-50%);
+  z-index: -10;
+}
+.progress-count {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 600;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  color: transparent;
+}
+.progress-count:after {
+  content: "";
+  height: 40px;
+  width: 40px;
+  background: #21d4fd;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: -10;
+}
+.progress-count:before {
+  content: "";
+  height: 10px;
+  width: 20px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -60%) rotate(-45deg);
+  transform-origin: center center;
+}
+.progress-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.current-item .progress-count:before,
+.current-item ~ .step-wizard-item .progress-count:before {
+  display: none;
+}
+.current-item ~ .step-wizard-item .progress-count:after {
+  height: 10px;
+  width: 10px;
+}
+.current-item ~ .step-wizard-item .progress-label {
+  opacity: 0.5;
+}
+.current-item .progress-count:after {
+  background: #fff;
+  border: 2px solid #21d4fd;
+}
+.current-item .progress-count {
+  color: #21d4fd;
+}
+
+/* =========== HR APPLICANT IMAGE CSS - Justine 08172023 =========== */
+.hr_applicant_image_container {
+  height: 250px;
+  width: 250px;
+  position: relative;
+  border: 3px solid #000000;
+  /* border-radius: 50%; */
+  background-size: 100% 100%;
+  margin: 15px auto;
+  overflow: hidden;
+}
+.hr_applicant_image {
+  height: 250px;
+  width: 250px;
+  /* border-radius: 50%; */
+}
+/* LLOYD CSS 08/18/2023 */
+.lds-ripple {
+  margin-top: 150px;
+  display: inline-block;
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  transition: opacity 0.75s, visibility 0.75s;
+  z-index: 3;
+}
+
+.loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #4adede;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+.nav-item {
+  transform: translateY(-100%);
+  animation: slideIn 0.1s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+/* PERSO ANNOUNCEMENT CSS Justine 09072023 */
+.scrollable_dropdown_menu {
+  height: auto;
+  max-height: 261px;
+  overflow-x: hidden;
+}
+.announce_by_pic {
+  margin-right: 1.5rem;
+  margin-left: 0.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.announce_header {
+  font-size: 20px;
+  font-weight: bold;
+  white-space: normal;
+  word-break: break-all;
+}
+.announce_by_and_date {
+  font-size: 13px;
+  font-style: italic;
+}
+.announce_by {
+  margin-right: 15px;
+}
+.icon_check {
+  color: #00c717;
+}
+.custom_accordion_button:not(.collapsed) {
+  color: inherit;
+  background: rgb(35, 65, 100);
+  color: #e8e8e8;
+}
+.custom_accordion_button.collapsed {
+  color: inherit;
+  background: rgb(0, 0, 0);
+  color: #e8e8e8;
+}
+.custom_accordion_button.collapsed::after {
+  filter: brightness(0%) invert(100%);
+}
+.custom_accordion_button:not(.collapsed)::after {
+  filter: brightness(0%) invert(70%);
+}
+.custom_accordion_button:focus {
+  box-shadow: inherit;
+}
+
+/* Custom JSTREE word Wrap CSS Justine 09132023 */
+.jstree-anchor {
+  /*enable wrapping*/
+  white-space: normal !important;
+  /*ensure lower nodes move down*/
+  height: auto !important;
+  /*offset icon width*/
+  padding-right: 24px;
+}
+.headerTable {
+  background: linear-gradient(
+    to bottom right,
+    #1f2f98 -22.01%,
+    #4393df 125.61%
+  );
+  color: white;
+  font-family: bold;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 80px;
+  padding-right: 80px;
+  font-size: 20px;
+  font-family: inherit;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.footerTable {
+  background: linear-gradient(
+    to bottom right,
+    #1f2f98 -22.01%,
+    #4393df 125.61%
+  );
+  color: white;
+  font-family: bold;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 80px;
+  padding-right: 80px;
+  font-size: 20px;
+  font-family: inherit;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

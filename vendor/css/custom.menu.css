@@ -1,0 +1,168 @@
+/* ========== Jm Acuisa CSS ========== */
+/* ==========  Change all CSS on 1-11-23 ========== */
+
+/* Desktop */
+@media (min-width: 768px) {
+}
+
+/* Mobile */
+@media (max-width: 767.8px) {
+}
+
+/* Fontawsome animation on hover */
+.fa-xmark {
+  opacity: 0.75;
+}
+
+.fa-xmark:hover {
+  transform: scale(1.5);
+  opacity: 1;
+  transition: all 0.25s;
+}
+
+/* Custom card color  */
+.card-1 {
+  background: linear-gradient(to bottom right, #fa3c3c, #aa0000);
+}
+
+.card-2 {
+  background: linear-gradient(to bottom right, #d6b80f, #ff7a00);
+}
+
+.card-3 {
+  background: linear-gradient(
+    to bottom right,
+    #3b7cfa -18.72%,
+    #3b7cfa -18.71%,
+    #00e190 120.42%
+  );
+}
+
+.card-4 {
+  background: linear-gradient(to bottom right, #6a11fa, #7d85ce);
+}
+
+.card-5 {
+  background: linear-gradient(
+    to bottom right,
+    #741eff -18.72%,
+    #ff37bb 120.42%
+  );
+}
+
+.card-6 {
+  background: linear-gradient(
+    to bottom right,
+    #8808c4 -22.01%,
+    #4075fc 125.61%
+  );
+}
+
+/* ADMINISTRATOR CARD BY LLOYD DATE 01/16/2023 */
+.card-7 {
+  background: linear-gradient(
+    to bottom right,
+    #ff029e -22.01%,
+    #bf19ce 125.61%
+  );
+}
+
+/* =========== Production Card CSS - Justine 03032023 =========== */
+.card-8 {
+  background: linear-gradient(
+    to bottom right,
+    #291af5 -18.72%,
+    #3a329c 120.42%
+  );
+}
+/* =========== Info Security Card CSS - Justine 03032023 =========== */
+.card-9 {
+  background: linear-gradient(
+    to bottom right,
+    #1100ff -18.72%,
+    #ff0000 120.42%
+  );
+}
+
+/* =========== IMS Express Card CSS - Justine 03032023 =========== */
+.card-10 {
+  background: linear-gradient(
+    to bottom right,
+    #b811da -18.72%,
+    #f756e1 120.42%
+  );
+}
+
+/* =========== IT Repair Request Card CSS - Justine 03032023 =========== */
+.card-11 {
+  background: linear-gradient(
+    to bottom right,
+    #be192a -18.72%,
+    #be192a 120.42%
+  );
+}
+
+.card-user {
+  background: linear-gradient(
+    to bottom right,
+    #4adede -22.01%,
+    #1f2f98 125.61%
+  );
+}
+
+/* ========== Menu List Design ========== */
+
+a {
+  text-decoration: none;
+}
+
+.menu-active {
+  background: rgba(255, 255, 255, 0.8) !important;
+  color: #505050 !important;
+  border: none;
+  border-left: 2px solid #505050 !important;
+  font-size: large !important;
+  font-weight: bold;
+  outline: none;
+  transition: all 0.25s;
+}
+
+.list-group-item {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  color: white;
+  font-weight: bold;
+}
+
+.list-group-item:hover,
+.list-group-item:focus {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  color: #505050 !important;
+}
+
+.menu::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ========== App Title in Card CSS ========== */
+
+.app-title {
+  writing-mode: vertical-rl;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.app-title-wrapper {
+  height: 90%;
+  top: 9%;
+  bottom: 1%;
+  display: flex;
+  align-items: end;
+  right: 0;
+  overflow: hidden;
+}

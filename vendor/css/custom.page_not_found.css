@@ -1,0 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page_not_found_container {
+  background-image: url("../images/error404v2.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+}
