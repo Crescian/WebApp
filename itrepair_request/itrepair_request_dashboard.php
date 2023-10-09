@@ -16,25 +16,8 @@ if (!isset($_GET['app_id'])) {
     header('location: ../Landing_Page.php');
 }
 ?>
-
-<!-- LINK REPAIR -->
-
 <link rel="stylesheet" type="text/css" href="../vendor/css/custom.menu.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/Bootstrap/css/bootstrap.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/Fontawesome/css/all.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/DataTables/datatables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/SweetAlert/bootstrap-4.css" /> -->
-
 <link rel="stylesheet" type="text/css" href="../vendor/css/style.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/css/custom.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/css/util.css" />
-<link rel="stylesheet" type="text/css" href="../vendor/css/swiper-bundle.min.css" />
-<link rel="stylesheet" type="text/css" href="../vendor/css/tree_style.min.css" /> -->
-
-<!-- <script type="text/javascript" src="../vendor/JQuery/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="../vendor/Bootstrap/js/bootstrap.bundle.min.js"></script> -->
-<!-- <script type="text/javascript" src="../vendor/DataTables/datatables.min.js"></script> -->
-<!-- <script type="text/javascript" src="../vendor/SweetAlert/sweetalert2.min.js"></script> -->
 <style>
     ::-webkit-scrollbar {
         width: 0.5vw;
@@ -1358,36 +1341,7 @@ if (!isset($_GET['app_id'])) {
         $('input:not([readonly]), select, textarea').removeClass('is-invalid is-valid');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // ! USER ACCESS FUNCTION
     // * ================ Global Variables ================
     let repairIndex = 0;
     let requestIndex = 0;
