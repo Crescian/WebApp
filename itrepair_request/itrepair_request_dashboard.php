@@ -244,7 +244,7 @@ if (!isset($_GET['app_id'])) {
                                         <label for="control_no" class="form-label fw-bold">Control Number:</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text text-bg-danger"><i class="fa-solid fa-tag"></i></span>
-                                            <select name="" id="control_no" class="form-select fw-bold" onchange="preview();"></select>
+                                            <select name="" id="control_no" class="form-select fw-bold" onchange="previewUserAccess();"></select>
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
@@ -373,114 +373,122 @@ if (!isset($_GET['app_id'])) {
                                     </div>
                                 </div>
 
+                                <?php
+                                // !THIS IS USER ACCESS SIDE =========================================================================================
+                                ?>
 
                                 <!-- requested user access here -->
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="date_request" class="form-label fw-bold">Date Request:</label>
-                                        <div class="input-group has-validation">
-                                            <span class="input-group-text text-bg-danger"><i class="fa-solid fa-calendar-check"></i></span>
-                                            <input type="date" id="date_request" value="<?php echo date('Y-m-d'); ?>" class="form-control fw-bold" disabled>
+                                <div class="request_section">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="date_request" class="form-label fw-bold">Date Request:</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text text-bg-danger"><i class="fa-solid fa-calendar-check"></i></span>
+                                                <input type="date" id="date_request" value="<?php echo date('Y-m-d'); ?>" class="form-control fw-bold" disabled>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm d-flex justify-content-center">
+                                        <hr color="red" size="2" width="15%" align="center">
+                                        <span class="fw-bold text-danger">ACCESS</span>
+                                        <hr color="red" size="2" width="85%" align="center">
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="access" id="access1" value="New" checked>
+                                                <label class="form-check-label fw-bold" for="access1">
+                                                    New
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="access" id="access2" value="Additional">
+                                                <label class="form-check-label fw-bold" for="access2">
+                                                    Additional
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="access" id="access3" value="Change">
+                                                <label class="form-check-label fw-bold" for="access3">
+                                                    Change
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm d-flex justify-content-center">
+                                        <hr color="red" size="2" width="15%" align="center">
+                                        <span class="fw-bold text-danger">PRIORITY</span>
+                                        <hr color="red" size="2" width="85%" align="center">
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="priority" id="priority1" value="Urgent" checked>
+                                                <label class="form-check-label fw-bold" for="priority1">
+                                                    Urgent
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="priority" id="priority2" value="For Scheduling">
+                                                <label class="form-check-label fw-bold" for="priority2">
+                                                    For Scheduling
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="domainAccount">
+                                                <label class="form-check-label fw-bold" for="domainAccount">
+                                                    Domain Account
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="input-group">
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" type="checkbox" id="mail_account" value="">
+                                            </div>
+                                            <input type="text" class="form-control" id="mail_account_input" placeholder="Mail Account" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="input-group">
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" type="checkbox" id="file_storage_access" value="">
+                                            </div>
+                                            <input type="text" class="form-control" id="file_storage_access_input" placeholder="File Storage Access" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="input-group">
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" type="checkbox" id="in_house_access" value="">
+                                            </div>
+                                            <input type="text" class="form-control" id="in_house_access_input" placeholder="In House Access" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text fw-bold">Purpose:</span>
+                                            <input type="text" class="form-control" id="purpose">
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm d-flex justify-content-center">
-                                    <hr color="red" size="2" width="15%" align="center">
-                                    <span class="fw-bold text-danger">ACCESS</span>
-                                    <hr color="red" size="2" width="85%" align="center">
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="access" id="access1" value="New" checked>
-                                            <label class="form-check-label fw-bold" for="access1">
-                                                New
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="access" id="access2" value="Additional">
-                                            <label class="form-check-label fw-bold" for="access2">
-                                                Additional
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="access" id="access3" value="Change">
-                                            <label class="form-check-label fw-bold" for="access3">
-                                                Change
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm d-flex justify-content-center">
-                                    <hr color="red" size="2" width="15%" align="center">
-                                    <span class="fw-bold text-danger">PRIORITY</span>
-                                    <hr color="red" size="2" width="85%" align="center">
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="priority" id="priority1" value="Urgent" checked>
-                                            <label class="form-check-label fw-bold" for="priority1">
-                                                Urgent
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="priority" id="priority2" value="For Scheduling">
-                                            <label class="form-check-label fw-bold" for="priority2">
-                                                For Scheduling
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="domainAccount">
-                                            <label class="form-check-label fw-bold" for="domainAccount">
-                                                Domain Account
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="input-group">
-                                        <div class="input-group-text">
-                                            <input class="form-check-input mt-0" type="checkbox" id="mail_account" value="">
-                                        </div>
-                                        <input type="text" class="form-control" id="mail_account_input" placeholder="Mail Account" disabled>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="input-group">
-                                        <div class="input-group-text">
-                                            <input class="form-check-input mt-0" type="checkbox" id="file_storage_access" value="">
-                                        </div>
-                                        <input type="text" class="form-control" id="file_storage_access_input" placeholder="File Storage Access" disabled>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="input-group">
-                                        <div class="input-group-text">
-                                            <input class="form-check-input mt-0" type="checkbox" id="in_house_access" value="">
-                                        </div>
-                                        <input type="text" class="form-control" id="in_house_access_input" placeholder="In House Access" disabled>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text fw-bold">Purpose:</span>
-                                        <input type="text" class="form-control" id="purpose">
-                                        <div class="invalid-feedback"></div>
-                                    </div>
-                                </div>
 
+                                <?php
+                                // !THIS IS USER ACCESS SIDE =========================================================================================
+                                ?>
 
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
@@ -517,7 +525,10 @@ if (!isset($_GET['app_id'])) {
                                 </div>
                                 <div class="d-grid gap-1 d-md-flex justify-content-md-end">
                                     <button type="button" class="btn btn-secondary" onclick="clearAttributes();">Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#submit_request_modal">Submit</button>
+                                    <button class="btn btn-danger fw-bold" id="generatePdf" onclick="generatePdf();"><i class="fa-solid fa-file-pdf"></i> Generate PDF</button>
+                                    <button type="button" class="btn btn-danger btn-submit" data-bs-toggle="modal" data-bs-target="#submit_request_modal">Submit</button>
+                                    <button type="button" class="btn btn-danger btn-save" onclick="saveUserAccess();">Save</button>
+                                    <button type="button" class="btn btn-warning btn-update" onclick="updateUserAccess(this.value);"><i class="fa-solid fa-pen-to-square animation-trigger"></i> Update</button>
                                 </div>
                             </div>
                             <!-- ## ==================== R E Q U E S T  F O R M  E N D ==================== ## -->
@@ -1082,14 +1093,306 @@ if (!isset($_GET['app_id'])) {
 </div>
 <?php include './../includes/footer.php'; ?>
 <script>
+    let appId = '<?php echo $_GET['app_id'] ?>';
+    var logged_user = '<?php echo $_SESSION['fullname']; ?>';
+    var user_department = '<?php echo $_SESSION['dept_code']; ?>';
+    loadControlNo();
+    // ! USER ACCESS FUNCTION
+    $('.btn-update').hide();
+    $('.btn-save').hide();
+    $('#generatePdf').hide();
+
+    function generatePdf() {
+        let contrl_no = $('#control_no').val();
+        window.open(`../itasset/it_user_access_request_pdf.php?control_no=${contrl_no}`, '_blank');
+    }
+
+    function previewUserAccess() {
+        var control_no = document.getElementById("control_no");
+        var firstOption = control_no.options[0];
+        if ($('#control_no').val() == firstOption.textContent.replace("UAF-", "")) {
+            $('input[type=text]').val('');
+            $('#date_needed').val('mm/dd/yy');
+            $('.btn-update').hide();
+            $('.btn-save').show();
+            $('input').prop('checked', false);
+            $('#access1').prop('checked', true);
+            $('#priority1').prop('checked', true);
+
+            $('#mail_account_input').prop('disabled', true);
+            $('#file_storage_access_input').prop('disabled', true);
+            $('#in_house_access_input').prop('disabled', true);
+            $('#generatePdf').hide();
+        } else {
+            $.ajax({
+                url: "../controller/itasset_controller/it_user_access_request_contr.class.php",
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    action: 'previewControlPreview',
+                    control_no: $('#control_no').val()
+                },
+                success: result => {
+                    $('#request_date_needed').val(result.date_need)
+                    $('#access1').val() == result.access ? $('#access1').prop('checked', true) : $('#access1').prop('checked', false);
+                    $('#access2').val() == result.access ? $('#access2').prop('checked', true) : $('#access2').prop('checked', false);
+                    $('#access3').val() == result.access ? $('#access3').prop('checked', true) : $('#access3').prop('checked', false);
+                    $('#priority1').val() == result.priority ? $('#priority1').prop('checked', true) : $('#priority1').prop('checked', false);
+                    $('#priority2').val() == result.priority ? $('#priority2').prop('checked', true) : $('#priority2').prop('checked', false);
+                    result.domain_account == true ? $('#domainAccount').prop('checked', true) : $('#domainAccount').prop('checked', false);
+
+                    result.mail_account == '' ? $('#mail_account').prop('checked', false) : $('#mail_account').prop('checked', true);
+                    result.file_storage_access == '' ? $('#file_storage_access').prop('checked', false) : $('#file_storage_access').prop('checked', true);
+                    result.in_house_access == '' ? $('#in_house_access').prop('checked', false) : $('#in_house_access').prop('checked', true);
+
+                    result.mail_account == '' ? $('#mail_account_input').prop('disabled', true) : $('#mail_account_input').prop('disabled', false);
+                    result.file_storage_access == '' ? $('#file_storage_access_input').prop('disabled', true) : $('#file_storage_access_input').prop('disabled', false);
+                    result.in_house_access == '' ? $('#in_house_access_input').prop('disabled', true) : $('#in_house_access_input').prop('disabled', false);
+                    $('#purpose').val(result.purpose);
+
+                    $('#request_requested_by').val(result.prepared_by);
+                    $('#request_approved_by').val(result.approved_by);
+                    $('#request_noted_by').val(result.noted_by);
+                    $('#mail_account_input').val(result.mail_account);
+                    $('#file_storage_access_input').val(result.file_storage_access);
+                    $('#in_house_access_input').val(result.in_house_access);
+                }
+            })
+            $('.btn-update').show();
+            $('.btn-save').hide();
+            $('#generatePdf').show();
+        }
+    }
+
+    function updateUserAccess() {
+        var radioButtons = document.getElementsByName("access");
+        var access;
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].checked) {
+                access = radioButtons[i].value;
+                break;
+            }
+        }
+        var radioButtons2 = document.getElementsByName("priority");
+        var priority;
+        for (var i = 0; i < radioButtons2.length; i++) {
+            if (radioButtons2[i].checked) {
+                priority = radioButtons2[i].value;
+                break;
+            }
+        }
+        var domainAccount = document.getElementById("domainAccount").checked;
+        Swal.fire({
+            title: 'Do you want to update the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Update',
+            denyButtonText: `Don't update`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('Update!', '', 'success')
+                $.ajax({
+                    url: "../controller/itasset_controller/it_user_access_request_contr.class.php",
+                    type: 'POST',
+                    data: {
+                        action: 'update',
+                        control_no: $('#control_no').val(),
+                        date_needed: $('#request_date_needed').val(),
+                        access: access,
+                        priority: priority,
+                        domainAccount: domainAccount, // Pass the checkbox value, not the DOM element
+                        mail_account: $('#mail_account_input').val(),
+                        file_storage_access: $('#file_storage_access_input').val(),
+                        in_house_access: $('#in_house_access_input').val(),
+                        purpose: $('#purpose').val(),
+                        preparedBy: $('#request_requested_by').val(),
+                        approvedBy: $('#request_approved_by').val(),
+                        notedBy: $('#request_noted_by').val()
+                    },
+                    success: result => {
+                        cancelBtn();
+                    }
+                })
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not update', '', 'info')
+            }
+        })
+    }
+
+    function toggleInputState(checkboxId, inputSelector) {
+        var checkbox = document.getElementById(checkboxId);
+        var inputField = document.querySelector(inputSelector);
+        inputField.disabled = !checkbox.checked;
+    }
+    document.getElementById("mail_account").addEventListener("change", function() {
+        toggleInputState("mail_account", ".form-control[placeholder='Mail Account']");
+    });
+    document.getElementById("file_storage_access").addEventListener("change", function() {
+        toggleInputState("file_storage_access", ".form-control[placeholder='File Storage Access']");
+    });
+    document.getElementById("in_house_access").addEventListener("change", function() {
+        toggleInputState("in_house_access", ".form-control[placeholder='In House Access']");
+    });
+    generateDefectiveRefno('tblit_control_no', 'user_access_control_no', 'control_no');
+    loadNotedBy();
+
+    function generateDefectiveRefno(inTable, inField, inObject) {
+        $('#' + inObject).html('');
+        $.ajax({
+            url: "../controller/itasset_controller/it_user_access_request_contr.class.php",
+            type: 'POST',
+            data: {
+                action: 'generate_defective_refno',
+                inTable: inTable,
+                inField: inField
+            },
+            success: function(result) {
+                $('#' + inObject).prepend(`<option value="${result}" class="text-primary fw-bold" selected>UAF-${result}</option>`);
+            }
+        });
+    }
+
+    function saveUserAccess() {
+        if (formValidation('purpose')) {
+            var radioButtons = document.getElementsByName("access");
+            var access;
+            for (var i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].checked) {
+                    access = radioButtons[i].value;
+                    break;
+                }
+            }
+            var radioButtons2 = document.getElementsByName("priority");
+            var priority;
+            for (var i = 0; i < radioButtons2.length; i++) {
+                if (radioButtons2[i].checked) {
+                    priority = radioButtons2[i].value;
+                    break;
+                }
+            }
+            var domainAccount = document.getElementById("domainAccount").checked;
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                    $.ajax({
+                        url: "../controller/itasset_controller/it_user_access_request_contr.class.php",
+                        type: 'POST',
+                        data: {
+                            action: 'saveUserAccess',
+                            control_no: $('#control_no').val(),
+                            date_request: $('#date_request').val(),
+                            date_needed: $('#request_date_needed').val(),
+                            access: access,
+                            priority: priority,
+                            domainAccount: domainAccount, // Pass the checkbox value, not the DOM element
+                            mail_account: $('#mail_account_input').val(),
+                            file_storage_access: $('#file_storage_access_input').val(),
+                            in_house_access: $('#in_house_access_input').val(),
+                            purpose: $('#purpose').val(),
+                            preparedBy: $('#request_requested_by').val(),
+                            approvedBy: $('#request_approved_by').val(),
+                            notedBy: $('#request_noted_by').val()
+                        },
+                        success: result => {
+                            if (result == 'Exist') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Control Number Already Exist!',
+                                });
+                            } else {
+                                generateDefectiveRefno('tblit_control_no', 'user_access_control_no', 'control_no');
+                                loadControlNo();
+                                $('input[type=text]').val('');
+                                $('#date_needed').val('mm/dd/yy');
+                                cancelBtn();
+                            }
+                        }
+                    });
+                    loadNotedBy();
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        }
+    }
+
+    function loadControlNo() {
+        $('#control_no').html('');
+        $.ajax({
+            url: "../controller/itasset_controller/it_user_access_request_contr.class.php",
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                action: 'loadControlNo',
+                logged_user: logged_user
+            },
+            success: result => {
+                $.each(result, function(key, value) {
+                    $('#control_no').append(`<option value="${value}" class="text-danger fw-bold">UAF-${value}</option>`);
+                })
+            }
+        });
+    }
+
+    function cancelBtn() {
+        $('#date_needed').val('mm/dd/yy');
+        $('input').prop('checked', false);
+        $('#access1').prop('checked', true);
+        $('#priority1').prop('checked', true);
+        $('#mail_account_input').prop('disabled', true);
+        $('#file_storage_access_input').prop('disabled', true);
+        $('#in_house_access_input').prop('disabled', true);
+        $('#control_no').find('option:first').prop('selected', 'selected');
+        $('#preparedBy').find('option:first').prop('selected', 'selected');
+        $('.btn-update').hide();
+        $('.btn-save').show();
+        $('#generatePdf').hide();
+        loadNotedBy();
+        $('input:not([readonly]), select, textarea').removeClass('is-invalid is-valid');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // * ================ Global Variables ================
     let repairIndex = 0;
     let requestIndex = 0;
     let currentFocus = -1;
     let activeMessageSender;
-    let appId = '<?php echo $_GET['app_id'] ?>';
-    var logged_user = '<?php echo $_SESSION['fullname']; ?>';
-    var user_department = '<?php echo $_SESSION['dept_code']; ?>';
     loadMessages();
     const search = $('#search');
     const resultList = $('.search-result-list');
@@ -1109,7 +1412,7 @@ if (!isset($_GET['app_id'])) {
     // * ~ Loading Animation ~
     $(window).on('load', function() {
         $('#loading').fadeOut(3000);
-    })
+    });
 
     // * ~ Validation on input and change ~
     $(document).on("input change textarea", "input.is-invalid, select.is-invalid, textarea.is-invalid", function() {
@@ -1123,6 +1426,7 @@ if (!isset($_GET['app_id'])) {
 
     $('#access_control_number').hide();
     $('#priority_urgent_section').hide();
+    $('.request_section').hide();
 
     search.on('keydown', e => {
         const listItems = resultList.find('li');
@@ -1937,6 +2241,20 @@ if (!isset($_GET['app_id'])) {
                         }
                     });
                 }
+            } else if ($('#request_type').val() == 'UserAccess') {
+                if (formValidation('request_date_needed', 'purpose')) {
+                    $.ajax({
+                        url: '../controller/itrepair_request_controller/itrepair_request.class.php',
+                        type: 'POST',
+                        data: {
+                            action: 'new_server_request',
+                        },
+                        success: function(res) {
+                            $('#queue_modal').modal('show');
+                            clearAttributes();
+                        }
+                    });
+                }
             }
         }, 500);
     }
@@ -2168,6 +2486,10 @@ if (!isset($_GET['app_id'])) {
 
             $('#access_control_number').hide();
             $('#priority_urgent_section').hide();
+            $('.request_section').hide();
+
+            $('.btn-save').hide();
+            $('.btn-submit').show();
         } else if ($(this).val() == "Hardware") {
             $('#software_type_section').hide().find('select').val('-');
             $('#description_app_subs_section').show();
@@ -2182,6 +2504,10 @@ if (!isset($_GET['app_id'])) {
 
             $('#access_control_number').hide();
             $('#priority_urgent_section').hide();
+            $('.request_section').hide();
+
+            $('.btn-save').hide();
+            $('.btn-submit').show();
         } else if ($(this).val() == "Server") {
             $('#server_ip_section').show().find('select').val('');
             $('#user_section').show();
@@ -2196,6 +2522,10 @@ if (!isset($_GET['app_id'])) {
 
             $('#access_control_number').hide();
             $('#priority_urgent_section').hide();
+            $('.request_section').hide();
+
+            $('.btn-save').hide();
+            $('.btn-submit').show();
         } else if ($(this).val() == "UserAccess") {
             $('#software_type_section').hide().find('select').val('');
             $('#description_app_subs_section').hide();
@@ -2210,6 +2540,10 @@ if (!isset($_GET['app_id'])) {
 
             $('#access_control_number').show();
             $('#priority_urgent_section').show();
+            $('.request_section').show();
+
+            $('.btn-save').show();
+            $('.btn-submit').hide();
         }
         // $(this).val() == "Software" ? $('#software_type_section').show().find('select').val('') : $('#software_type_section').hide().find('select').val('-');
     });
@@ -2279,9 +2613,12 @@ if (!isset($_GET['app_id'])) {
         $('#software_type_section').hide().find('select').val('-');
         $('#app_subs_section').show();
         $('#website_section').hide().find('option:first').prop('selected', 'selected');
+        $('#control_no').find('option:first').prop('selected', 'selected');
+
         $('#request_noted_by').val('Oliver Razalan');
         $('#location, #requested_by, #request_requested_by').prop('disabled', true);
         loadNotedBy();
+        cancelBtn();
     }
 </script>
 <script>

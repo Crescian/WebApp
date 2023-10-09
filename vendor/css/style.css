@@ -41,7 +41,7 @@
   width: fit-content;
 }
 
-#loading {
+/* #loading {
   position: fixed;
   display: inline-block;
   width: 100%;
@@ -53,7 +53,7 @@
   opacity: 1;
   z-index: 99;
   transition: all 0.25s ease;
-}
+} */
 
 .spinner {
   position: absolute;

@@ -236,8 +236,7 @@ if (!isset($_GET['app_id'])) {
                 <div class="position-absolute app-title-wrapper">
                     <span class="fw-bold app-title text-nowrap">IT ASSET</span>
                 </div>
-                <div class="card-body menu" style="height: 85vh; overflow-y:auto;">
-                </div>
+                <div class="card-body menu" style="height: 85vh; overflow-y:auto;"></div>
             </div>
         </div>
         <!-- ==================== CARD SECTION END ==================== -->
@@ -245,6 +244,7 @@ if (!isset($_GET['app_id'])) {
 </div>
 <?php include './../includes/footer.php'; ?>
 <script>
+
     var logged_user = '<?php echo $_SESSION['fullname']; ?>';
     var user_department = '<?php echo $_SESSION['dept_code']; ?>';
     $('.btn-update').hide();

@@ -61,8 +61,8 @@ class ITUserAccess
         } else {
             $updateRefno = "UPDATE tblit_control_no SET user_access_control_no = '{$control_no}';";
             self::sqlQuery($updateRefno, $php_update_itasset_api);
-            $sqlstring = "INSERT INTO tblit_user_access_request(control_no,date_need,access,priority,domain_account,mail_account,file_storage_access,in_house_access,purpose,prepared_by,prepared_by_sign,approved_by,approved_by_sign,noted_by,noted_by_sign)
-        VALUES('{$control_no}','{$date_needed}','{$access}','{$priority}','{$domainAccount}','{$mail_account}','{$file_storage_access}','{$in_house_access}','{$purpose}','{$preparedBy}','{$prepared_by_signature}','{$approvedBy}','{$approved_by_signature}','{$notedBy}','{$noted_by_signature}');";
+            $sqlstring = "INSERT INTO tblit_user_access_request(control_no,access,priority,domain_account,mail_account,file_storage_access,in_house_access,purpose,prepared_by,prepared_by_sign,approved_by,approved_by_sign,noted_by,noted_by_sign)
+            VALUES('{$control_no}','{$access}','{$priority}','{$domainAccount}','{$mail_account}','{$file_storage_access}','{$in_house_access}','{$purpose}','{$preparedBy}','{$prepared_by_signature}','{$approvedBy}','{$approved_by_signature}','{$notedBy}','{$noted_by_signature}');";
             self::sqlQuery($sqlstring, $php_insert_itasset_api);
         }
     }
@@ -84,9 +84,9 @@ class ITUserAccess
         }
         return json_encode($resultData_List);
     }
-    public function loadControlNo($php_fetch_itasset_api)
+    public function loadControlNo($php_fetch_itasset_api, $logged_user)
     {
-        $sqlstring = "SELECT control_no FROM tblit_user_access_request;";
+        $sqlstring = "SELECT control_no FROM tblit_user_access_request WHERE prepared_by = '{$logged_user}' ORDER BY useraccessid DESC;";
         $data_result = self::sqlQuery($sqlstring, $php_fetch_itasset_api);
         $row_count = array_sum(array_map("count", $data_result));
         //* ======== Prepare Array ========
