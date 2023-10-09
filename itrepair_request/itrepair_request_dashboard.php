@@ -1103,8 +1103,8 @@ if (!isset($_GET['app_id'])) {
     $('#generatePdf').hide();
 
     function generatePdf() {
-        let contrl_no = $('#control_no').val();
-        window.open(`../itasset/it_user_access_request_pdf.php?control_no=${contrl_no}`, '_blank');
+        let control_no = $('#control_no').val();
+        window.open(`../itasset/it_user_access_request_pdf.php?control_no=${control_no}`, '_blank');
     }
 
     function previewUserAccess() {
