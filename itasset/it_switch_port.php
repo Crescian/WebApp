@@ -229,6 +229,7 @@ if (!isset($_GET['app_id'])) {
     var user_department = '<?php echo $_SESSION['dept_code']; ?>';
     loadTableSwitch();
     $('.hide').hide();
+
     function loadTableSwitch() {
         let inTable = $('#switch_table').DataTable({
             'responsive': true,
@@ -407,6 +408,7 @@ if (!isset($_GET['app_id'])) {
             success: function(result) {
                 portLength = result.data;
                 let arrayLength = [];
+                console.log(letter);
                 for (var i = 1; i <= portLength; i++) {
                     arrayLength.push(i);
                 }
@@ -575,7 +577,7 @@ if (!isset($_GET['app_id'])) {
         } else {
             clearValidate(arguments[0]);
         }
-        
+
         if (location.trim() == '') {
             validate(arguments[1], 'Location is required field.');
             validated = false;

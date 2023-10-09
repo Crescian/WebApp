@@ -52,7 +52,7 @@ class MYPDF extends TCPDF
         if ($this->PageNo() >= 2) {
             $this->SetFont('helvetica', '', 10);
             $this->Cell(0, 7, '', 0, 1, 'L');
-            $this->Cell(0, 5, 'Daily Room Inspection Checklist', 0, 0, 'L');
+            $this->Cell(0, 5, 'Switch Port', 0, 0, 'L');
         }
     }
     public function Footer() //* Page footer
@@ -98,6 +98,8 @@ class MYPDF extends TCPDF
         $this->TableHeader();
         $w = array(47.5, 61.5, 40.5, 40.5);
         foreach ($actionArray as $details) {
+            $num_pages = $this->getNumPages(); //* Get current number of pages.
+            $this->startTransaction();
             $lan_cableHeight = $this->GetStringHeight($w[0], $details['lan_cable']);
             $locationHeight = $this->GetStringHeight($w[1], $details['location']);
             $switchHeight = $this->GetStringHeight($w[2], $details['switch']);
@@ -108,6 +110,17 @@ class MYPDF extends TCPDF
             $this->MultiCell($w[2], $cellHeight, $details['switch'], 1, 'C', 0, 0);
             $this->MultiCell($w[3], $cellHeight, $details['port'], 1, 'C', 0, 0);
             $this->Ln();
+            if ($num_pages < $this->getNumPages()) {
+                $this->rollbackTransaction(true); //* Undo adding the row.
+                //* Add page
+                $this->SetMargins(12.5, 12, 12.5);
+                $this->AddPage();
+                //* Draw the header.
+                $this->TableHeader();
+                // * Re-do the row.
+            } else {
+                $this->commitTransaction(); //* Otherwise we are fine with this row, discard undo history.
+            }
         }
         $this->Cell(array_sum($w), 0, '', 'T');
         $this->Ln();

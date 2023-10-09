@@ -27,7 +27,7 @@ class ITSwitchAndPort
             3 => 'port',
             4 => 'switchmoduleid'
         );
-        $sqlstring = "SELECT * FROM tblit_switch_module_assign_switch INNER JOIN tblit_switch_module 
+        $sqlstring = "SELECT lan_cable,location,tblit_switch_module.switch as switch,tblit_switch_module_assign_switch.port as port,tblit_switch_module_assign_switch.switchmoduleid as switchmoduleid FROM tblit_switch_module_assign_switch INNER JOIN tblit_switch_module 
         ON tblit_switch_module.assignswitchid = tblit_switch_module_assign_switch.switch WHERE 1 = 1";
         $data_result = self::sqlQuery($sqlstring, $php_fetch_itasset_api);
         $result_total_record = array_sum(array_map("count", $data_result));
