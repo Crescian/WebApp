@@ -39,8 +39,8 @@ function getJobPosition($name, $php_fetch_bannerweb_api)
 {
     $sqlstring = "SELECT pos_name FROM prl_employee 
             INNER JOIN prl_position ON prl_employee.pos_code = prl_position.pos_code
-            WHERE CONCAT(emp_fn || ' ' || emp_mi || '. ' || emp_sn || emp_ext) = '{$name}'
-		    ORDER BY (emp_fn || ' ' || emp_mi || '. ' || emp_sn || emp_ext) ASC
+            WHERE CONCAT(emp_fn || ' ' || emp_sn) = '{$name}'
+		    ORDER BY (emp_fn || ' ' || emp_sn) ASC
             ";
     $data_result = sqlQuery($sqlstring, $php_fetch_bannerweb_api);
     foreach ($data_result['data'] as $row) {
