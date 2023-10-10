@@ -215,11 +215,11 @@ if (isset($_POST['action'])) {
             // ========= STRETCH PROFILE COLUMN IF APPS ARE ODD =========
             $col_number_profile = fmod($card_count, 2) == 0 ? 'col-12 col-sm-12 col-md-12' : 'col';
             // ? Total Count Notification
-            $sqlstringcategory = "SELECT *, 'request' AS category FROM bpi_notification_module WHERE table_database IN ('it_repair_request','info_security') AND prepared_by = ?
+            $sqlstringcategory = "SELECT *, 'request' AS category FROM bpi_notification_module WHERE table_database IN ('it_repair_request','info_security','itassetdb_new') AND prepared_by = ?
                      UNION ALL
-                     SELECT *, 'approved' AS category FROM bpi_notification_module WHERE table_database IN ('it_repair_request','info_security') AND table_name IN ('tblit_request','info_sec_web_app_request') AND approved_by = ?
+                     SELECT *, 'approved' AS category FROM bpi_notification_module WHERE table_database IN ('it_repair_request','info_security','itassetdb_new') AND table_name IN ('tblit_request','info_sec_web_app_request','tblit_user_access_request') AND approved_by = ?
                      UNION ALL
-                     SELECT *, 'noted' AS category FROM bpi_notification_module WHERE table_database IN ('it_repair_request','info_security') AND table_name IN ('tblit_request','info_sec_web_app_request') AND noted_by = ?
+                     SELECT *, 'noted' AS category FROM bpi_notification_module WHERE table_database IN ('it_repair_request','info_security','itassetdb_new') AND table_name IN ('tblit_request','info_sec_web_app_request','tblit_user_access_request') AND noted_by = ?
                      ORDER BY prepared_by_date DESC";
             $result_stmt_categ = $BannerWebLive->prepare($sqlstringcategory);
             $result_stmt_categ->execute([$_SESSION['fullname'], $_SESSION['fullname'], $_SESSION['fullname']]);
@@ -246,6 +246,10 @@ if (isset($_POST['action'])) {
                             }
                         } else if ($table_name == 'info_sec_web_app_request') {
                             if ($approved_acknowledge == true && $noted_acknowledge == true && $repair_by_acknowledge == true && $prepared_acknowledge == false) {
+                                $countRequestNotif++;
+                            }
+                        } else if ($table_name == 'tblit_user_access_request') {
+                            if ($approved_acknowledge == true && $noted_acknowledge == true && $prepared_acknowledge == false) {
                                 $countRequestNotif++;
                             }
                         }
