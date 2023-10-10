@@ -5,7 +5,7 @@ if (isset($_POST['action'])) {
     $WHPO = $conn->db_conn_whpo(); //* Physical Security Database connection
     $ITHardwareIssue = new ITHarwareIssued();
     $action = trim($_POST['action']);
-
+    
     switch ($action) {
         case 'loadTableHardwareIssuance':
             $search = $_POST['search']['value'];

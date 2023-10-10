@@ -156,8 +156,8 @@ class Connection
     //* IT Asset Connection
     public function db_conn_it_asset()
     {
-        // return self::db_connection('192.107.17.49', 'itassetdb_new', 'postgres', 'B@nn3r2023');
-        return self::db_connection('localhost', 'itassetdb_new', 'postgres', 'B@nn3r2022');
+        return self::db_connection('192.107.17.49', 'itassetdb_new', 'postgres', 'B@nn3r2023');
+        // return self::db_connection('localhost', 'itassetdb_new', 'postgres', 'B@nn3r2022');
     }
     //* IMS Express Connection
     public function db_conn_ims_express()

@@ -17,7 +17,7 @@ if (!isset($_GET['app_id'])) {
 session_start();
 $emp_no = $_SESSION['empno'];
 $sqlstring = "SELECT * FROM prl_employee WHERE empno = '" . $emp_no . "'";
-$result_stmt = $BannerWeb->prepare($sqlstring);
+$result_stmt = $BannerWebLive->prepare($sqlstring);
 $result_stmt->execute();
 $result_Res = $result_stmt->fetch(PDO::FETCH_ASSOC);
 $fullname = $result_Res['emp_fn'] . ' ' . $result_Res['emp_sn'];

@@ -16,25 +16,8 @@ if (!isset($_GET['app_id'])) {
     header('location: ../Landing_Page.php');
 }
 ?>
-
-<!-- LINK REPAIR -->
-
 <link rel="stylesheet" type="text/css" href="../vendor/css/custom.menu.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/Bootstrap/css/bootstrap.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/Fontawesome/css/all.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/DataTables/datatables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/SweetAlert/bootstrap-4.css" /> -->
-
 <link rel="stylesheet" type="text/css" href="../vendor/css/style.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/css/custom.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="../vendor/css/util.css" />
-<link rel="stylesheet" type="text/css" href="../vendor/css/swiper-bundle.min.css" />
-<link rel="stylesheet" type="text/css" href="../vendor/css/tree_style.min.css" /> -->
-
-<!-- <script type="text/javascript" src="../vendor/JQuery/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="../vendor/Bootstrap/js/bootstrap.bundle.min.js"></script> -->
-<!-- <script type="text/javascript" src="../vendor/DataTables/datatables.min.js"></script> -->
-<!-- <script type="text/javascript" src="../vendor/SweetAlert/sweetalert2.min.js"></script> -->
 <style>
     ::-webkit-scrollbar {
         width: 0.5vw;
@@ -1102,6 +1085,11 @@ if (!isset($_GET['app_id'])) {
     $('.btn-save').hide();
     $('#generatePdf').hide();
 
+    // * ~ Date needed value is current date ~
+    let currentDate = (new Date()).toISOString().split('T')[0];
+    $('#request_date_needed').val(currentDate).prop('min', currentDate);
+    $('#date_request').val(currentDate).prop('min', currentDate);
+
     function generatePdf() {
         let control_no = $('#control_no').val();
         window.open(`../itasset/it_user_access_request_pdf.php?control_no=${control_no}`, '_blank');
@@ -1111,18 +1099,8 @@ if (!isset($_GET['app_id'])) {
         var control_no = document.getElementById("control_no");
         var firstOption = control_no.options[0];
         if ($('#control_no').val() == firstOption.textContent.replace("UAF-", "")) {
-            $('input[type=text]').val('');
-            $('#date_needed').val('mm/dd/yy');
-            $('.btn-update').hide();
-            $('.btn-save').show();
-            $('input').prop('checked', false);
-            $('#access1').prop('checked', true);
-            $('#priority1').prop('checked', true);
-
-            $('#mail_account_input').prop('disabled', true);
-            $('#file_storage_access_input').prop('disabled', true);
-            $('#in_house_access_input').prop('disabled', true);
-            $('#generatePdf').hide();
+            clearAttributes();
+            userDetails();
         } else {
             $.ajax({
                 url: "../controller/itasset_controller/it_user_access_request_contr.class.php",
@@ -1210,7 +1188,7 @@ if (!isset($_GET['app_id'])) {
                         notedBy: $('#request_noted_by').val()
                     },
                     success: result => {
-                        cancelBtn();
+                        // cancelBtn();
                     }
                 })
             } else if (result.isDenied) {
@@ -1281,7 +1259,7 @@ if (!isset($_GET['app_id'])) {
                 if (result.isConfirmed) {
                     Swal.fire('Saved!', '', 'success')
                     $.ajax({
-                        url: "../controller/itasset_controller/it_user_access_request_contr.class.php",
+                        url: '../controller/itrepair_request_controller/itrepair_request.class.php',
                         type: 'POST',
                         data: {
                             action: 'saveUserAccess',
@@ -1309,13 +1287,12 @@ if (!isset($_GET['app_id'])) {
                             } else {
                                 generateDefectiveRefno('tblit_control_no', 'user_access_control_no', 'control_no');
                                 loadControlNo();
-                                $('input[type=text]').val('');
-                                $('#date_needed').val('mm/dd/yy');
-                                cancelBtn();
+                                clearAttributes();
+                                userDetails();
                             }
                         }
                     });
-                    loadNotedBy();
+                    // loadNotedBy();
                 } else if (result.isDenied) {
                     Swal.fire('Changes are not saved', '', 'info')
                 }
@@ -1341,53 +1318,23 @@ if (!isset($_GET['app_id'])) {
         });
     }
 
-    function cancelBtn() {
-        $('#date_needed').val('mm/dd/yy');
-        $('input').prop('checked', false);
-        $('#access1').prop('checked', true);
-        $('#priority1').prop('checked', true);
-        $('#mail_account_input').prop('disabled', true);
-        $('#file_storage_access_input').prop('disabled', true);
-        $('#in_house_access_input').prop('disabled', true);
-        $('#control_no').find('option:first').prop('selected', 'selected');
-        $('#preparedBy').find('option:first').prop('selected', 'selected');
-        $('.btn-update').hide();
-        $('.btn-save').show();
-        $('#generatePdf').hide();
-        loadNotedBy();
-        $('input:not([readonly]), select, textarea').removeClass('is-invalid is-valid');
-    }
+    // function cancelBtn() {
+    //     $('#date_needed').val('mm/dd/yy');
+    //     $('input').prop('checked', false);
+    //     $('#access1').prop('checked', true);
+    //     $('#priority1').prop('checked', true);
+    //     $('#mail_account_input').prop('disabled', true);
+    //     $('#file_storage_access_input').prop('disabled', true);
+    //     $('#in_house_access_input').prop('disabled', true);
+    //     $('#control_no').find('option:first').prop('selected', 'selected');
+    //     $('.btn-update').hide();
+    //     $('.btn-save').show();
+    //     $('#generatePdf').hide();
+    //     $('input:not([readonly]), select, textarea').removeClass('is-invalid is-valid');
+    //     loadNotedBy();
+    // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // ! USER ACCESS FUNCTION
     // * ================ Global Variables ================
     let repairIndex = 0;
     let requestIndex = 0;
@@ -1760,21 +1707,11 @@ if (!isset($_GET['app_id'])) {
         });
     }
 
-    //  !=======HELPER FUNCTION 
-
-    //NOT WORKING 
     function loadDepartmentEmployee(dept) {
         $('#request_requested_by_edit').html('<option value="">Choose...</option>');
         loadEditRequest(dept, "request_requested_by_edit");
     }
-    //NOT WORKING 
 
-    // ?=====FUNTION TO MIGRATE TO OOP
-
-
-    // * ~ Date needed value is current date ~
-    let currentDate = (new Date()).toISOString().split('T')[0];
-    $('#request_date_needed').val(currentDate).prop('min', currentDate);
     // * ================ F U N C T I O N S ================
 
     // * ~ Function Calls ~
@@ -2136,7 +2073,6 @@ if (!isset($_GET['app_id'])) {
     }
 
     function loadMessageSender() {
-
         $('#message_sender').html(logged_user);
         $.ajax({
             url: '../controller/itrepair_request_controller/itrepair_request.class.php',
@@ -2162,7 +2098,6 @@ if (!isset($_GET['app_id'])) {
     function newRequest() {
         $('#submit_request_modal').modal('hide');
         setTimeout(() => {
-
             if ($('#request_type').val() == 'Software' || $('#request_type').val() == 'Hardware') {
                 if ($('#request_software_type').val() == 'Website') {
                     if (formValidation('request_type', 'request_software_type', 'request_date_needed', 'web_priority', 'service_type', 'web_app_name', 'web_description', 'request_department', 'request_requested_by', 'request_approved_by', 'request_noted_by')) {
@@ -2341,6 +2276,7 @@ if (!isset($_GET['app_id'])) {
                 $('#department').val(result.department);
                 $('#request_department').val(result.department);
                 $('#request_requested_by').val(result.fullname);
+                $('#requested_by').val(result.fullname);
             }
         })
     }
@@ -2490,6 +2426,8 @@ if (!isset($_GET['app_id'])) {
 
             $('.btn-save').hide();
             $('.btn-submit').show();
+
+            userDetails();
         } else if ($(this).val() == "Hardware") {
             $('#software_type_section').hide().find('select').val('-');
             $('#description_app_subs_section').show();
@@ -2508,6 +2446,8 @@ if (!isset($_GET['app_id'])) {
 
             $('.btn-save').hide();
             $('.btn-submit').show();
+
+            userDetails();
         } else if ($(this).val() == "Server") {
             $('#server_ip_section').show().find('select').val('');
             $('#user_section').show();
@@ -2526,6 +2466,8 @@ if (!isset($_GET['app_id'])) {
 
             $('.btn-save').hide();
             $('.btn-submit').show();
+
+            userDetails();
         } else if ($(this).val() == "UserAccess") {
             $('#software_type_section').hide().find('select').val('');
             $('#description_app_subs_section').hide();
@@ -2544,6 +2486,7 @@ if (!isset($_GET['app_id'])) {
 
             $('.btn-save').show();
             $('.btn-submit').hide();
+            userDetails();
         }
         // $(this).val() == "Software" ? $('#software_type_section').show().find('select').val('') : $('#software_type_section').hide().find('select').val('-');
     });
@@ -2605,20 +2548,30 @@ if (!isset($_GET['app_id'])) {
 
     //* ~ Reset ~
     function clearAttributes() {
-        $('select, textarea').removeClass('is-invalid is-valid').val('');
-        $('input').removeClass('is-invalid is-valid');
         $('#request_date_needed').val(currentDate).prop('min', currentDate);
-        $('#request_type').val('Hardware');
-        // $('#request_software_type').val('-');
-        $('#software_type_section').hide().find('select').val('-');
-        $('#app_subs_section').show();
-        $('#website_section').hide().find('option:first').prop('selected', 'selected');
-        $('#control_no').find('option:first').prop('selected', 'selected');
-
         $('#request_noted_by').val('Oliver Razalan');
+        $('textarea, input').removeClass('is-invalid is-valid').val('');
+        $('input').removeClass('is-invalid is-valid');
         $('#location, #requested_by, #request_requested_by').prop('disabled', true);
+
+        $('input').prop('checked', false);
+        $('#access1').prop('checked', true);
+        $('#priority1').prop('checked', true);
+        $('#mail_account_input').prop('disabled', true);
+        $('#file_storage_access_input').prop('disabled', true);
+        $('#in_house_access_input').prop('disabled', true);
+        $('.btn-update').hide();
+        $('#generatePdf').hide();
+        $('#control_no').find('option:first').prop('selected', 'selected');
+        $('#purpose').val('');
+        $('#mail_account_input').val('');
+        $('#file_storage_access_input').val('');
+        $('#in_house_access_input').val('');
+
+        $('#request_date_needed').val(currentDate).prop('min', currentDate);
+        $('#date_request').val(currentDate).prop('min', currentDate);
+        userDetails();
         loadNotedBy();
-        cancelBtn();
     }
 </script>
 <script>

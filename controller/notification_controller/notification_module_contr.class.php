@@ -6,10 +6,11 @@ if (isset($_POST['action'])) {
     $ITR = $conn->db_conn_it_repair_request(); //* IT REPAIR AND REQUEST Database connection
     $InfoSec = $conn->db_conn_info_security(); //* INFO SEC Database connection
     $PHD = $conn->db_conn_physical_security(); //* Physical Security Database connection
+    $itassetdbnew = $conn->db_conn_itassetExtention(); //* IT ASSET DB NEW Database connection
     $notif = new notificationModule();
     $action = trim($_POST['action']);
     $date = date('Y-m-d');
-    $connDb = ['it_repair_request' => $ITR, 'info_security' => $InfoSec, 'physical_security' => $PHD];
+    $connDb = ['it_repair_request' => $ITR, 'info_security' => $InfoSec, 'physical_security' => $PHD,'itassetdb_new' => $itassetdbnew];
 
     switch ($action) {
         case 'load_nav_link':
@@ -62,7 +63,7 @@ if (isset($_POST['action'])) {
             $table_database = trim($_POST['table_name']);
             $db_name = trim($_POST['table']);
             $connection = $connDb[$_POST['table']];
-            echo $notif->acknowledge($connection, $ITR, $BannerWeb, $id, $table_id, $table_id_name, $table_name, $date);
+            echo $notif->acknowledge($connection, $itassetdbnew, $ITR, $BannerWeb, $id, $table_id, $table_id_name, $table_name, $date);
             break;
         case 'fillData':
             $table_database = trim($_POST['table_database']);
