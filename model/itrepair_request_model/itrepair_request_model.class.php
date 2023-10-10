@@ -16,6 +16,15 @@ class ItRepairRequest
         curl_close($curl);
         return json_decode($json_response, true);
     }
+    public function fetchSignature($emp_name, $php_fetch_bannerweb_api)
+    {
+        $empSignature = "SELECT encode(employee_signature, 'escape') as employee_signature FROM bpi_employee_signature WHERE emp_name = '{$emp_name}';";
+        $data_result = self::sqlQuery($empSignature, $php_fetch_bannerweb_api);
+        foreach ($data_result['data'] as $row) {
+            $empSignature_row = $row['employee_signature'];
+        }
+        return $empSignature_row;
+    }
 
     public function fetchOngoingRepairRequest($db, $table, $data, $data2)
     {
@@ -229,7 +238,7 @@ class ItRepairRequest
 
         if ($rowCount) foreach ($rowData as $row) $data['web_request'][$row['control_no']][$row['prepared_by']] =  $row['status'];
         $data['web_request'] ??= null;
-        
+
         $query = "SELECT server_access_revoke_controlno, server_access_status, prepared_by FROM info_sec_server_access_revoke_request WHERE prepared_by = ? AND server_access_status NOT IN('Done', 'Cancelled') ORDER BY server_access_revoke_controlno";
         $stmt = $InfoSec->prepare($query);
         $stmt->execute([$logged_user]);
@@ -503,5 +512,31 @@ class ItRepairRequest
             WHERE server_access_revoke_controlno = ?";
         $stmt = $InfoSec->prepare($sqlstring);
         $stmt->execute([$server_edit, $server_ip_edit, $mac_address_edit, $user_edit, $location_server_edit, $request_purpose_edit, $access_revoke_edit, $request_requested_by_edit, $request_approved_by_edit, $request_noted_by_edit, $queue_number]);
+    }
+    public function saveUserAccess($php_fetch_itasset_api, $php_fetch_bannerweb_api, $php_insert_bannerweb_api, $php_update_itasset_api, $php_insert_itasset_api, $itassetdbnew, $control_no, $date, $date_needed, $access, $priority, $domainAccount, $mail_account, $file_storage_access, $in_house_access, $purpose, $preparedBy, $approvedBy, $notedBy)
+    {
+        $prepared_by_signature = self::fetchSignature($preparedBy, $php_fetch_bannerweb_api);
+        $approved_by_signature = self::fetchSignature($approvedBy, $php_fetch_bannerweb_api);
+        $noted_by_signature = self::fetchSignature($notedBy, $php_fetch_bannerweb_api);
+        $sqlstringValidate = "SELECT control_no FROM tblit_user_access_request;";
+        $data_result = self::sqlQuery($sqlstringValidate, $php_fetch_itasset_api);
+        foreach ($data_result['data'] as $row) {
+            $control_no_validate = $row['control_no'];
+        }
+        if ($control_no_validate == $control_no) {
+            echo 'Exist';
+        } else {
+            $updateRefno = "UPDATE tblit_control_no SET user_access_control_no = '{$control_no}';";
+            self::sqlQuery($updateRefno, $php_update_itasset_api);
+            $sqlstring = "INSERT INTO tblit_user_access_request(control_no,date_need,access,priority,domain_account,mail_account,file_storage_access,in_house_access,purpose,prepared_by,prepared_by_sign,approved_by,approved_by_sign,noted_by,noted_by_sign)
+            VALUES('{$control_no}','{$date_needed}','{$access}','{$priority}','{$domainAccount}','{$mail_account}','{$file_storage_access}','{$in_house_access}','{$purpose}','{$preparedBy}','{$prepared_by_signature}','{$approvedBy}','{$approved_by_signature}','{$notedBy}','{$noted_by_signature}') RETURNING useraccessid;";
+            $stmt = $itassetdbnew->prepare($sqlstring);
+            $stmt->execute();
+
+            $useraccessid = $itassetdbnew->lastInsertId();
+            
+            $sqlstringNotif = "INSERT INTO bpi_notification_module(table_name, table_database, table_field_id, table_field_id_name,prepared_by, prepared_by_date, approved_by, noted_by, app_id, field1, field2, field3, field4, field5, field6,field7, remarks) VALUES ('tblit_user_access_request', 'itassetdb_new', '{$useraccessid}', 'useraccessid', '{$preparedBy}', '{$date}', '{$approvedBy}', '{$notedBy}', '8', 'control_no', 'date_request', 'date_need', 'priority', 'purpose', 'mail_account', 'in_house_access', '{$purpose}')";
+            self::sqlQuery($sqlstringNotif, $php_insert_bannerweb_api);
+        }
     }
 }

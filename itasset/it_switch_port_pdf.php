@@ -3,12 +3,14 @@ session_start();
 include '../vendor/tcpdf/tcpdf.php';
 include_once '../configuration/connection.php';
 $actionArray = array();
-$sqlstringAction = "SELECT lan_cable,location,switch,port FROM tblit_switch_module_assign_switch";
+$sqlstringAction = "SELECT lan_cable,location,tblit_switch_module.switch as switch,tblit_switch_module_assign_switch.port as port,tblit_switch_module_assign_switch.switchmoduleid as switchmoduleid FROM tblit_switch_module_assign_switch INNER JOIN tblit_switch_module 
+        ON tblit_switch_module.assignswitchid = tblit_switch_module_assign_switch.switch";
 $data_result = sqlQuery($sqlstringAction, $php_fetch_itasset_api);
 
 foreach ($data_result['data'] as $row) {
     $actionArray[] = $row;
 }
+
 function sqlQuery($sqlstring, $connection)
 {
     $data_base64 = base64_encode($sqlstring);

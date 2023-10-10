@@ -46,26 +46,6 @@ class ITUserAccess
         }
         return $defective_ref_no;
     }
-    public function saveUserAccess($php_fetch_itasset_api, $php_fetch_bannerweb_api, $php_update_itasset_api, $php_insert_itasset_api, $control_no, $date_needed, $access, $priority, $domainAccount, $mail_account, $file_storage_access, $in_house_access, $purpose, $preparedBy, $approvedBy, $notedBy)
-    {
-        $prepared_by_signature = self::fetchSignature($preparedBy, $php_fetch_bannerweb_api);
-        $approved_by_signature = self::fetchSignature($approvedBy, $php_fetch_bannerweb_api);
-        $noted_by_signature = self::fetchSignature($notedBy, $php_fetch_bannerweb_api);
-        $sqlstringValidate = "SELECT control_no FROM tblit_user_access_request;";
-        $data_result = self::sqlQuery($sqlstringValidate, $php_fetch_itasset_api);
-        foreach ($data_result['data'] as $row) {
-            $control_no_validate = $row['control_no'];
-        }
-        if ($control_no_validate == $control_no) {
-            echo 'Exist';
-        } else {
-            $updateRefno = "UPDATE tblit_control_no SET user_access_control_no = '{$control_no}';";
-            self::sqlQuery($updateRefno, $php_update_itasset_api);
-            $sqlstring = "INSERT INTO tblit_user_access_request(control_no,access,priority,domain_account,mail_account,file_storage_access,in_house_access,purpose,prepared_by,prepared_by_sign,approved_by,approved_by_sign,noted_by,noted_by_sign)
-            VALUES('{$control_no}','{$access}','{$priority}','{$domainAccount}','{$mail_account}','{$file_storage_access}','{$in_house_access}','{$purpose}','{$preparedBy}','{$prepared_by_signature}','{$approvedBy}','{$approved_by_signature}','{$notedBy}','{$noted_by_signature}');";
-            self::sqlQuery($sqlstring, $php_insert_itasset_api);
-        }
-    }
     public function loadDepartmentHead($php_fetch_bannerweb_api)
     {
         $sqlstring = "SELECT (emp_fn || ' ' || emp_mi || '. ' || emp_sn || emp_ext) AS full_name, pos_code FROM prl_employee WHERE job_level in('Level-08', 'Level-07') ORDER BY full_name;";

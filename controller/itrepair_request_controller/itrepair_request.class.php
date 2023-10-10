@@ -29,6 +29,7 @@ if (isset($_POST['action'])) {
     $ITR = $conn->db_conn_it_repair_request(); //* IT REPAIR AND REQUEST Database connection
     $InfoSec = $conn->db_conn_info_security(); //* INFO SEC Database connection
     $BannerWeb = $conn->db_conn_bannerweb(); //* BANNER WEB Database connection
+    $itassetdbnew = $conn->db_conn_itassetExtention(); //* IT ASSET DB NEW Database connection
     $ItRepairRequest = new ItRepairRequest();
     $action = trim($_POST['action']);
     $date = date('Y-m-d');
@@ -250,6 +251,22 @@ if (isset($_POST['action'])) {
             $request_noted_by_edit = trim($_POST['request_noted_by_edit']);
             $queue_number = trim($_POST['queue_number']);
             echo $ItRepairRequest->loadUpdateEditRequestServer($InfoSec, $server_edit, $user_edit, $access_revoke_edit, $server_ip_edit, $mac_address_edit, $location_server_edit, $request_purpose_edit, $request_requested_by_edit, $request_approved_by_edit, $request_noted_by_edit, $queue_number);
+            break;
+        case 'saveUserAccess':
+            $control_no = trim($_POST['control_no']);
+            $date_request = trim($_POST['date_request']);
+            $date_needed = trim($_POST['date_needed']);
+            $access = trim($_POST['access']);
+            $priority = trim($_POST['priority']);
+            $domainAccount = trim($_POST['domainAccount']);
+            $mail_account = trim($_POST['mail_account']);
+            $file_storage_access = trim($_POST['file_storage_access']);
+            $in_house_access = trim($_POST['in_house_access']);
+            $purpose = trim($_POST['purpose']);
+            $preparedBy = trim($_POST['preparedBy']);
+            $approvedBy = trim($_POST['approvedBy']);
+            $notedBy = trim($_POST['notedBy']);
+            echo $ItRepairRequest->saveUserAccess($php_fetch_itasset_api, $php_fetch_bannerweb_api, $php_insert_bannerweb_api, $php_update_itasset_api, $php_insert_itasset_api, $itassetdbnew, $control_no, $date, $date_needed, $access, $priority, $domainAccount, $mail_account, $file_storage_access, $in_house_access, $purpose, $preparedBy, $approvedBy, $notedBy);
             break;
     }
 }
