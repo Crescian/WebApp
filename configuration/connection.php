@@ -156,7 +156,7 @@ class Connection
     //* IT Asset Connection
     public function db_conn_it_asset()
     {
-        return self::db_connection('192.107.17.49', 'itassetdb_new', 'postgres', 'B@nn3r2023');
+        return self::db_connection('192.107.29.95', 'itassetdb_new', 'postgres', '123456789');
         // return self::db_connection('localhost', 'itassetdb_new', 'postgres', 'B@nn3r2022');
     }
     //* IMS Express Connection
@@ -169,13 +169,6 @@ class Connection
     public function db_conn_whpo()
     {
         return self::db_connection('192.107.29.95', 'WHPO', 'postgres', '123456789');
-        // return self::db_connection('192.107.17.49', 'ims_express', 'postgres', 'B@nn3r2023');
-    }
-    //* ITX Connection
-    public function db_conn_itassetExtention()
-    {
-        return self::db_connection('192.107.29.95', 'itassetdb_new', 'postgres', '123456789');
-        // return self::db_connection('localhost', 'itassetdb_new', 'postgres', 'B@nn3r2022');
         // return self::db_connection('192.107.17.49', 'ims_express', 'postgres', 'B@nn3r2023');
     }
 }

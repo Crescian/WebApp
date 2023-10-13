@@ -6,7 +6,7 @@ if (isset($_POST['action'])) {
     $ITR = $conn->db_conn_it_repair_request(); //* IT REPAIR AND REQUEST Database connection
     $InfoSec = $conn->db_conn_info_security(); //* INFO SEC Database connection
     $PHD = $conn->db_conn_physical_security(); //* Physical Security Database connection
-    $itassetdbnew = $conn->db_conn_itassetExtention(); //* IT ASSET DB NEW Database connection
+    $itassetdbnew = $conn->db_conn_it_asset(); //* IT ASSET DB NEW Database connection
     $notif = new notificationModule();
     $action = trim($_POST['action']);
     $date = date('Y-m-d');

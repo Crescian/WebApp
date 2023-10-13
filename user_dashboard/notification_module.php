@@ -364,10 +364,6 @@ session_start();
             'language': {
                 'emptyTable': "Your data is in the archive."
             },
-            // 'processing': true,"
-            // 'lengthChange': false,
-            // 'info': false,
-            // 'searching': false,
             'ajax': {
                 url: '../controller/notification_controller/notification_module_contr.class.php',
                 type: 'POST',
@@ -535,7 +531,7 @@ session_start();
                                     }
                                     break;
                                 case 'Request':
-                                    if (result.repair_by_acknowledge && !result.prepared_by_acknowledge || (table_databse == 'physical_security' && result.checked_by_acknowledge || table_databse == 'itassetdb_new' && result.approved_by_acknowledge) && result.noted_by_acknowledge && !result.prepared_by_acknowledge) {
+                                    if (result.repair_by_acknowledge && !result.prepared_by_acknowledge || (table_databse == 'physical_security' && result.checked_by_acknowledge || table_databse == 'itassetdb_new' && result.repair_by_acknowledge && result.approved_by_acknowledge) && result.noted_by_acknowledge && !result.prepared_by_acknowledge) {
                                         html += `<button type="button" class="btn btn-success btn-sm fw-bold" style="border-radius: 20px;" onclick="btnAcknowledge(${result.notificationid});"><i class="fa-solid fa-check fa-beat p-r-8"></i>Approved Acknowledge</button>`
                                     }
                                     break;
@@ -707,10 +703,10 @@ session_start();
                     if (data.cancel_status) {
                         button_color = 'btn-danger';
                         icon = '<i class="fa-solid fa-ban fa-shake p-r-8 p-l-8"></i>';
-                    } else if (data.repair_by_acknowledge && !data.prepared_by_acknowledge || (data.table_database == 'physical_security' && data.checked_by_acknowledge || data.table_database == 'itassetdb_new' && data.approved_by_acknowledge) && data.noted_by_acknowledge && !data.prepared_by_acknowledge) {
+                    } else if (data.repair_by_acknowledge && !data.prepared_by_acknowledge || (data.table_database == 'physical_security' && data.checked_by_acknowledge || data.table_database == 'itassetdb_new' && data.repair_by_acknowledge && data.approved_by_acknowledge) && data.noted_by_acknowledge && !data.prepared_by_acknowledge) {
                         button_color = 'btn-dark';
                         icon = '<i class="fa-regular fa-envelope fa-shake p-r-8 p-l-8"></i>';
-                    } else if (data.repair_by_acknowledge && data.prepared_by_acknowledge || (data.table_database == 'physical_security' && data.checked_by_acknowledge || data.table_database == 'itassetdb_new' && data.approved_by_acknowledge) && data.noted_by_acknowledge && data.prepared_by_acknowledge) {
+                    } else if (data.repair_by_acknowledge && data.prepared_by_acknowledge || (data.table_database == 'physical_security' && data.checked_by_acknowledge || data.table_database == 'itassetdb_new' && data.repair_by_acknowledge && data.approved_by_acknowledge) && data.noted_by_acknowledge && data.prepared_by_acknowledge) {
                         button_color = 'btn-warning';
                         icon = '<i class="fa-solid fa-envelope-open-text fa-fade p-r-8 p-l-8"></i>';
                     } else {

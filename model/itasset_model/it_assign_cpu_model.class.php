@@ -27,7 +27,7 @@ class ITAssignCpu
             4 => 'date_updated',
             5 => 'active_pc',
         );
-
+        
         //* =========== Fetch Total Record Data ===========
         $query = "SELECT * FROM tblit_assign_cpu ";
         $data_result = self::sqlQuery($query, $php_fetch_itasset_api);

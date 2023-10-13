@@ -29,7 +29,7 @@ if (isset($_POST['action'])) {
     $ITR = $conn->db_conn_it_repair_request(); //* IT REPAIR AND REQUEST Database connection
     $InfoSec = $conn->db_conn_info_security(); //* INFO SEC Database connection
     $BannerWeb = $conn->db_conn_bannerweb(); //* BANNER WEB Database connection
-    $itassetdbnew = $conn->db_conn_itassetExtention(); //* IT ASSET DB NEW Database connection
+    $itassetdbnew = $conn->db_conn_it_asset(); //* IT ASSET DB NEW Database connection
     $ItRepairRequest = new ItRepairRequest();
     $action = trim($_POST['action']);
     $date = date('Y-m-d');
@@ -70,6 +70,43 @@ if (isset($_POST['action'])) {
                 if ($dateNeeded) {
                     $mail->Body    .= ', and needed on <strong>' . $dateNeeded . '</strong></p>';
                 }
+                $mail->Body    .= '<p style="font-family:verdana;font-size:15px;">On the button below or use this link <a href="https://192.107.17.48/BannerWebApp/index.php">https://192.107.17.48/BannerWebApp/index.php</a></p>
+                                        <div style="display: flex;justify-content: center;align-items: center;">
+                                            <button type="submit" style="border:none;color:white;padding:15px 32px;text-align:center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer;background-color: #4CAF50;width: 75%;">Login</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>';
+                $mail->send();
+                $mail->clearAddresses();
+            }
+        }
+    }
+    function sendEmail2($BannerWeb, $mail, $requestor, $emp_name, $assignatory, $mail_account, $file_storage_access, $in_house_access, $control_no, $date_request)
+    {
+        $sqlstring = "SELECT empno FROM prl_employee WHERE (emp_fn || ' ' || emp_sn) = '{$emp_name}';";
+        $stmt = $BannerWeb->prepare($sqlstring);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $empno = $row['empno'];
+            $sqlstringEmail = "SELECT user_email FROM bpi_user_accounts WHERE empno = '{$empno}';";
+            $result_stmt = $BannerWeb->prepare($sqlstringEmail);
+            $result_stmt->execute();
+            while ($rows = $result_stmt->fetch(PDO::FETCH_ASSOC)) {
+                $mail->addAddress($rows['user_email']);
+                $mail->Subject = 'FOR ' . $assignatory . ': USER ACCESS REQUEST';
+                $mail->Body    = '
+                            <form action="https://192.107.17.48/BannerWebApp/index.php" method="get">
+                                <div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);transition: 0.3s;width: 40%;border-radius: 5px;">
+                                    <div style="padding: 25px 16px;">
+                                        <p style="font-family:verdana;font-size:30px;">Good day! ' . $emp_name . '</p>
+                                        <p style="font-family:verdana;font-size:15px;"><strong>' . $requestor . '</strong> has requested to the domain account,<br>
+                                        Mail Account <strong>'. $mail_account. '</strong>,<br> 
+                                        File Storage: <strong>'. $file_storage_access. '</strong>,<br>
+                                        and In-house: <strong>'. $in_house_access. '</strong>,<br>
+                                        with the control number <strong>UAF-'. $control_no. '</strong>.<br>
+                                        This request was made on <strong>'. $date_request. '</strong>.';
+
                 $mail->Body    .= '<p style="font-family:verdana;font-size:15px;">On the button below or use this link <a href="https://192.107.17.48/BannerWebApp/index.php">https://192.107.17.48/BannerWebApp/index.php</a></p>
                                         <div style="display: flex;justify-content: center;align-items: center;">
                                             <button type="submit" style="border:none;color:white;padding:15px 32px;text-align:center;text-decoration: none;display: inline-block;font-size: 16px;cursor: pointer;background-color: #4CAF50;width: 75%;">Login</button>
@@ -266,6 +303,8 @@ if (isset($_POST['action'])) {
             $preparedBy = trim($_POST['preparedBy']);
             $approvedBy = trim($_POST['approvedBy']);
             $notedBy = trim($_POST['notedBy']);
+            sendEmail2($BannerWeb, $mail, $preparedBy, $approvedBy, 'APPROVAL', $mail_account, $file_storage_access, $in_house_access, $control_no, $date_request);
+            sendEmail2($BannerWeb, $mail, $preparedBy, $notedBy, 'NOTED', $mail_account, $file_storage_access, $in_house_access, $control_no, $date_request);
             echo $ItRepairRequest->saveUserAccess($php_fetch_itasset_api, $php_fetch_bannerweb_api, $php_insert_bannerweb_api, $php_update_itasset_api, $php_insert_itasset_api, $itassetdbnew, $control_no, $date, $date_needed, $access, $priority, $domainAccount, $mail_account, $file_storage_access, $in_house_access, $purpose, $preparedBy, $approvedBy, $notedBy);
             break;
     }

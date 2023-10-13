@@ -319,4 +319,16 @@ class ITHarwareIssued
         }
         return $description;
     }
+    public function getItemControlNumber($php_fetch_itasset_api, $item)
+    {
+        $items = strtolower(str_replace(" ", "_", $item));
+        $itemsFilter = $items == 'cd-rw/dvd' ? 'dvd' : $items;
+        $sqlstring = "SELECT $itemsFilter FROM tblit_control_no_item";;
+        $data_result = self::sqlQuery($sqlstring, $php_fetch_itasset_api);
+        foreach ($data_result['data'] as $row) {
+            $cpuControlNumberYear = substr($row[$itemsFilter], 0, 3);
+            $cpuControlNumberTrack = substr($row[$itemsFilter], 3);
+            return $cpuControlNumberYear .  sprintf("%03d", $cpuControlNumberTrack + 1);
+        }
+    }
 }
