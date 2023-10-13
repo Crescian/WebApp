@@ -21,7 +21,8 @@ if (isset($_POST['action'])) {
             break;
         case 'loadControlNo':
             $logged_user = trim($_POST['logged_user']);
-            echo $ITUserAccess->loadControlNo($php_fetch_itasset_api, $logged_user);
+            $access_lvl = trim($_POST['access_lvl']);
+            echo $ITUserAccess->loadControlNo($php_fetch_itasset_api, $logged_user, $access_lvl);
             break;
         case 'previewControlPreview':
             $control_no = trim($_POST['control_no']);

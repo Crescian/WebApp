@@ -1079,6 +1079,7 @@ if (!isset($_GET['app_id'])) {
     let appId = '<?php echo $_GET['app_id'] ?>';
     var logged_user = '<?php echo $_SESSION['fullname']; ?>';
     var user_department = '<?php echo $_SESSION['dept_code']; ?>';
+    var access_lvl = '<?php echo $_SESSION['access_lvl']; ?>';
     loadControlNo();
     // ! USER ACCESS FUNCTION
     $('.btn-update').hide();
@@ -1308,7 +1309,8 @@ if (!isset($_GET['app_id'])) {
             dataType: 'JSON',
             data: {
                 action: 'loadControlNo',
-                logged_user: logged_user
+                logged_user: logged_user,
+                access_lvl: access_lvl
             },
             success: result => {
                 $.each(result, function(key, value) {
@@ -2427,6 +2429,9 @@ if (!isset($_GET['app_id'])) {
             $('.btn-save').hide();
             $('.btn-submit').show();
 
+            $('#generatePdf').hide();
+            $('.btn-update').hide();
+
             userDetails();
         } else if ($(this).val() == "Hardware") {
             $('#software_type_section').hide().find('select').val('-');
@@ -2447,6 +2452,9 @@ if (!isset($_GET['app_id'])) {
             $('.btn-save').hide();
             $('.btn-submit').show();
 
+            $('#generatePdf').hide();
+            $('.btn-update').hide();
+
             userDetails();
         } else if ($(this).val() == "Server") {
             $('#server_ip_section').show().find('select').val('');
@@ -2466,6 +2474,9 @@ if (!isset($_GET['app_id'])) {
 
             $('.btn-save').hide();
             $('.btn-submit').show();
+            
+            $('#generatePdf').hide();
+            $('.btn-update').hide();
 
             userDetails();
         } else if ($(this).val() == "UserAccess") {

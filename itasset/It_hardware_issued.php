@@ -120,15 +120,16 @@ if (!isset($_GET['app_id'])) {
                     <div class="spinner-grow spinner-grow-sm text-danger" role="status"></div>
                     <div class="spinner-grow spinner-grow-sm text-danger" role="status"></div>
                 </div>
-                <h4 class="modal-title text-danger fw-bold mb-4" id="modalHardwareIssuanceLabel"><i class="fa-solid fa-file-circle-plus me-1"></i>New Entry / Display</h4>
+                <div class="d-flex justify-content-between">
+                    <h4 class="modal-title text-danger fw-bold mb-4" id="modalHardwareIssuanceLabel"><i class="fa-solid fa-file-circle-plus me-1"></i>New Entry / Display</h4>
+                    <button class="btn btn-dark btn-sm m-r-10 m-b-10" onclick="scanQrCode();">Scan <i class="fa-solid fa-qrcode fa-beat"></i></button>
+                </div>
                 <div class="row">
-
                     <div class="form-group col-md-12 mb-3">
                         <select class="form-select fw-bold" id="department" onchange="loadEmployee(this.value);">
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
-
                     <div class="form-group col-md-12 mb-3">
                         <select class="form-select fw-bold" id="employee" onchange="loadCpuControlNo(this.value);" disabled>
                             <option value="" selected>Select an Employee:</option>
@@ -144,15 +145,16 @@ if (!isset($_GET['app_id'])) {
                     </div>
 
                     <div class="form-group col-md-12 mb-3">
-                        <select class="form-select fw-bold" id="item" disabled>
+                        <select class="form-select fw-bold" id="item" onchange="getItemControlNumber(this.value);" disabled>
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="form-group col-md-12 mb-3">
-                        <input type="textarea" id="barcode_number" class="form-control fw-bold" onchange="getDescription(this.value);" placeholder="Barcode Number:" autocomplete="off" disabled>
+                        <input type="textarea" id="item_control_number" class="form-control fw-bold" placeholder="Item Control Number:" autocomplete="off" disabled>
                         <div class="invalid-feedback"></div>
                     </div>
+
 
                     <div class="form-group col-md-12 mb-3">
                         <textarea name="description" id="description" class="form-control fw-bold" cols="10" placeholder="Description:" rows="5" disabled></textarea>
@@ -175,6 +177,22 @@ if (!isset($_GET['app_id'])) {
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalQrIssuance" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalHardwareIssuanceLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">SCAN <i class="fa-solid fa-qrcode fa-beat"></i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group col-md-12 mb-3">
+                    <input type="textarea" id="barcode_number" class="form-control fw-bold" onchange="getDescription(this.value);" placeholder="Barcode Number:" autocomplete="off">
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Alert Modal -->
 <div class="modal fade" id="modalActionHardwareIssuance" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalActionHardwareIssuanceLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -192,6 +210,10 @@ if (!isset($_GET['app_id'])) {
 </div>
 <?php include './../includes/footer.php'; ?>
 <script>
+    function scanQrCode() {
+        $('#modalQrIssuance').modal('show');
+    }
+
     function getDescription(barcode) {
         $('#description').val('');
         $.ajax({
@@ -203,6 +225,20 @@ if (!isset($_GET['app_id'])) {
             },
             success: result => {
                 $('#description').val(result);
+            }
+        })
+    }
+
+    function getItemControlNumber(item) {
+        $.ajax({
+            url: '../controller/itasset_controller/it_hardware_issued_contr.class.php',
+            type: 'POST',
+            data: {
+                action: 'getItemControlNumber',
+                item: item
+            },
+            success: function(result) {
+                $('#item_control_number').val(result);
             }
         })
     }
@@ -322,7 +358,7 @@ if (!isset($_GET['app_id'])) {
     function newHardwareIssuance() { //* ~ New entry of Hardware Issuance ~
         $('#item').prop('disabled', true);
         $('#cpu_control_no').prop('disabled', true);
-        $('#barcode_number').prop('disabled', true);
+        // $('#barcode_number').prop('disabled', true);
         $('#issuer').prop('disabled', true);
         clearAttributes();
         loadInputData();
@@ -331,7 +367,7 @@ if (!isset($_GET['app_id'])) {
 
     //* ~ Save new entry of Hardware Issuance ~
     function saveHardwareIssuance() {
-        if (formValidation('department', 'employee', 'cpu_control_no', 'barcode_number', 'description', 'issuer')) {
+        if (formValidation('department', 'employee', 'cpu_control_no', 'item', 'barcode_number', 'item_control_number', 'description', 'issuer')) {
             $.ajax({
                 url: '../controller/itasset_controller/it_hardware_issued_contr.class.php',
                 type: 'POST',
@@ -486,10 +522,12 @@ if (!isset($_GET['app_id'])) {
     function formValidation(...args) { //* ~ Form validation function ~
         let department = $(`#${arguments[0]}`).val();
         let employee = $(`#${arguments[1]}`).val();
-        let cpuControlNumber = $(`#${arguments[2]}`).val();
-        let barcodeNumber = $(`#${arguments[3]}`).val();
-        let issuer = $(`#${arguments[4]}`).val();
-        let description = $(`#${arguments[5]}`).val();
+        let item = $(`#${arguments[2]}`).val();
+        let cpuControlNumber = $(`#${arguments[3]}`).val();
+        let barcodeNumber = $(`#${arguments[4]}`).val();
+        let item_control_number = $(`#${arguments[5]}`).val();
+        let description = $(`#${arguments[6]}`).val();
+        let issuer = $(`#${arguments[7]}`).val();
         let validated = true;
         if (department.trim() == '') {
             validate(arguments[0], 'Department is required field.');
@@ -509,23 +547,35 @@ if (!isset($_GET['app_id'])) {
         } else {
             clearValidate(arguments[2]);
         }
-        if (barcodeNumber.trim() == '') {
-            validate(arguments[3], 'Barcode Number is required field.');
+        if (cpuControlNumber.trim() == '') {
+            validate(arguments[3], 'Item is required field.');
             validated = false;
         } else {
             clearValidate(arguments[3]);
         }
-        if (issuer.trim() == '') {
-            validate(arguments[4], 'Issuer is required field.');
+        if (barcodeNumber.trim() == '') {
+            validate(arguments[4], 'Barcode Number is required field.');
             validated = false;
         } else {
             clearValidate(arguments[4]);
         }
-        if (description.trim() == '') {
-            validate(arguments[4], 'Issuer is required field.');
+        if (item_control_number.trim() == '') {
+            validate(arguments[5], 'Control Number is required field.');
             validated = false;
         } else {
             clearValidate(arguments[5]);
+        }
+        if (description.trim() == '') {
+            validate(arguments[6], 'Scan to get the description is required field.');
+            validated = false;
+        } else {
+            clearValidate(arguments[6]);
+        }
+        if (issuer.trim() == '') {
+            validate(arguments[7], 'Issuer is required field.');
+            validated = false;
+        } else {
+            clearValidate(arguments[7]);
         }
         return validated;
     }

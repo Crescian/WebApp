@@ -64,9 +64,14 @@ class ITUserAccess
         }
         return json_encode($resultData_List);
     }
-    public function loadControlNo($php_fetch_itasset_api, $logged_user)
+    public function loadControlNo($php_fetch_itasset_api, $logged_user, $access_lvl)
     {
-        $sqlstring = "SELECT control_no FROM tblit_user_access_request WHERE prepared_by = '{$logged_user}' ORDER BY useraccessid DESC;";
+        if ($access_lvl == 'SDS') {
+            $filter = "";
+        } else {
+            $filter = "WHERE prepared_by = '{$logged_user}'";
+        }
+        $sqlstring = "SELECT control_no FROM tblit_user_access_request $filter ORDER BY useraccessid DESC;";
         $data_result = self::sqlQuery($sqlstring, $php_fetch_itasset_api);
         $row_count = array_sum(array_map("count", $data_result));
         //* ======== Prepare Array ========

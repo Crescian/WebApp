@@ -1,26 +1,6 @@
 <?php
 include '../vendor/tcpdf/tcpdf.php';
 include_once '../configuration/connection.php';
-$actionArray = array();
-
-$control_no = $_GET['control_no'];
-$sqlstringAction = "SELECT * FROM tblit_user_access_request WHERE control_no = '{$control_no}'";
-$data_result = sqlQuery($sqlstringAction, $php_fetch_itasset_api);
-foreach ($data_result['data'] as $row) {
-    $mail_account = $row['mail_account'];
-    $file_storage_access = $row['file_storage_access'];
-    $in_house_access = $row['in_house_access'];
-    $domain_account = $row['domain_account'];
-    $purpose = $row['purpose'];
-    $access = $row['access'];
-    $priority = $row['priority'];
-    $prepared_by = $row['prepared_by'];
-    $approved_by = $row['approved_by'];
-    $noted_by = $row['noted_by'];
-    $prepared_by_job_pos = getJobPosition($row['prepared_by'], $php_fetch_bannerweb_api);
-    $approved_by_job_pos = getJobPosition($row['approved_by'], $php_fetch_bannerweb_api);
-    $noted_by_job_pos = getJobPosition($row['noted_by'], $php_fetch_bannerweb_api);
-}
 function sqlQuery($sqlstring, $connection)
 {
     $data_base64 = base64_encode($sqlstring);
@@ -40,12 +20,37 @@ function getJobPosition($name, $php_fetch_bannerweb_api)
     $sqlstring = "SELECT pos_name FROM prl_employee 
             INNER JOIN prl_position ON prl_employee.pos_code = prl_position.pos_code
             WHERE CONCAT(emp_fn || ' ' || emp_sn) = '{$name}'
-		    ORDER BY (emp_fn || ' ' || emp_sn) ASC
-            ";
+		    ORDER BY (emp_fn || ' ' || emp_sn) ASC;";
     $data_result = sqlQuery($sqlstring, $php_fetch_bannerweb_api);
     foreach ($data_result['data'] as $row) {
         return $row['pos_name'];
     }
+}
+$control_no = $_GET['control_no'];
+$sqlstringAction = "SELECT *,
+CASE WHEN prepared_by_acknowledge = true THEN encode(prepared_by_sign, 'escape') ELSE '' END AS prepared_by_sign,
+CASE WHEN approved_by_acknowledge = true THEN encode(approved_by_sign, 'escape') ELSE '' END AS approved_by_sign,
+CASE WHEN noted_by_acknowledge = true THEN encode(noted_by_sign, 'escape') ELSE '' END AS noted_by_sign
+FROM tblit_user_access_request WHERE control_no = '{$control_no}';";
+$data_result = sqlQuery($sqlstringAction, $php_fetch_itasset_api);
+foreach ($data_result['data'] as $row) {
+    $mail_account = $row['mail_account'];
+    $file_storage_access = $row['file_storage_access'];
+    $in_house_access = $row['in_house_access'];
+    $domain_account = $row['domain_account'];
+    $purpose = $row['purpose'];
+    $access = $row['access'];
+    $priority = $row['priority'];
+    $prepared_by = $row['prepared_by'];
+    $prepared_by_date = $row['prepared_by_date'];
+    $approved_by = $row['approved_by'];
+    $noted_by = $row['noted_by'];
+    $prepared_by_sign = $row['prepared_by_sign'];
+    $approved_by_sign = $row['approved_by_sign'];
+    $noted_by_sign = $row['noted_by_sign'];
+    $prepared_by_job_pos = getJobPosition($row['prepared_by'], $php_fetch_bannerweb_api);
+    $approved_by_job_pos = getJobPosition($row['approved_by'], $php_fetch_bannerweb_api);
+    $noted_by_job_pos = getJobPosition($row['noted_by'], $php_fetch_bannerweb_api);
 }
 //* extend TCPF with custom functions
 class MYPDF extends TCPDF
@@ -111,6 +116,7 @@ $pdf->AddPage();
 $pdf->Ln(33);
 
 //?DATA
+
 $pdf->SetFont('helvetica', '', 12);
 $pdf->Cell(140, 40, '', 1, 0, 'L');
 $pdf->Cell(2, 40, '', 0, 0, 'L');
@@ -175,6 +181,11 @@ $pdf->Cell(3, 5, '', 0, 0, 'L', 0, '', 0, false, 'T', 'M');
 $pdf->Cell(63.6, 9, 'Noted by:', 0, 0, 'L', 0, '', 0, false, 'T', 'M');
 $pdf->Ln(5);
 
+//* -------------------------------- Signature --------------------------------
+$pdf->Image('@' . base64_decode($prepared_by_sign), 10, 120, 40, 20, '', '', '', false, 300, '', false, false, 0, false, false, false);
+$pdf->Image('@' . base64_decode($approved_by_sign), 74, 120, 40, 20, '', '', '', false, 300, '', false, false, 0, false, false, false);
+$pdf->Image('@' . base64_decode($noted_by_sign), 140, 120, 40, 20, '', '', '', false, 300, '', false, false, 0, false, false, false);
+
 $pdf->SetFont('helvetica', '', 10);
 $pdf->Ln(15);
 $pdf->Cell(63.5, 5, $prepared_by, 0, 0, 'L', 0, '', 0, false, 'T', 'M');
@@ -183,11 +194,16 @@ $pdf->Cell(63.6, 5, $approved_by, 0, 0, 'L', 0, '', 0, false, 'T', 'M');
 $pdf->Cell(3, 5, '', 0, 0, 'L', 0, '', 0, false, 'T', 'M');
 $pdf->Cell(63.6, 5, $noted_by, 0, 0, 'L', 0, '', 0, false, 'T', 'M');
 $pdf->Ln();
-$pdf->Cell(63.6, 5, $prepared_by_job_pos, 0, 0, 'L', 0, '', 0, false, 'T', 'M');
+// $pdf->Cell(63.6, 5, $prepared_by_job_pos, 0, 0, 'L', 0, '', 0, false, 'T', 'M');
+$pdf->MultiCell(63.6, 10, $prepared_by_job_pos, 0, 'L', 0, 0);
 $pdf->Cell(3, 5, '', 0, 0, 'L', 0, '', 0, false, 'T', 'M');
 $pdf->MultiCell(63.6, 10, $approved_by_job_pos, 0, 'L', 0, 0);
 $pdf->Cell(3, 5, '', 0, 0, 'L', 0, '', 0, false, 'T', 'M');
 $pdf->MultiCell(63.6, 10, $noted_by_job_pos, 0, 'L', 0, 0);
 $filename = "It Hardware Issued.pdf";
 
+$pdf->SetY(-126);
+$pdf->SetX(-55.5);
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(43, 0, 'Date: '.date_format(date_create($prepared_by_date), 'F d, Y'), 0, 1, 'C');
 $pdf->Output($filename, 'I'); //* Close and output PDF document

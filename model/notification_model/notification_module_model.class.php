@@ -96,7 +96,7 @@ class notificationModule
         $data['cancelP_count'] ??= null;
         $query = "SELECT COUNT(*) AS prepar_count
         FROM bpi_notification_module
-        WHERE (table_database = 'it_repair_request' AND repair_by_acknowledge = true OR table_database = 'physical_security' OR table_database = 'itassetdb_new' AND noted_by_acknowledge = true) AND prepared_by_acknowledge = false AND app_id = '{$app_id}' AND prepared_by = '{$fullname}';";
+        WHERE ((table_database = 'it_repair_request' OR table_database = 'itassetdb_new') AND repair_by_acknowledge = true OR table_database = 'physical_security' AND noted_by_acknowledge = true) AND prepared_by_acknowledge = false AND app_id = '{$app_id}' AND prepared_by = '{$fullname}';";
         $stmt = $BannerWeb->prepare($query);
         $stmt->execute();
         $rowData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -488,8 +488,9 @@ class notificationModule
                             $result_stmt = $itassetdbnew->prepare($sqlstring);
                             $result_stmt->execute([$date, $table_id]);
                         } else {
+                            
                             $acknowledgeType = "prepared_by_acknowledge";
-                            $sqlstring = "UPDATE $table_name SET prepared_by_acknowledge = 'true', prepared_by_date = ? WHERE $table_id_name = ?";
+                            $sqlstring = "UPDATE $table_name SET prepared_by_acknowledge = 'true', prepared_by_date = ?, status = 'Done' WHERE $table_id_name = ?";
                             $result_stmt = $itassetdbnew->prepare($sqlstring);
                             $result_stmt->execute([$date, $table_id]);
                         }

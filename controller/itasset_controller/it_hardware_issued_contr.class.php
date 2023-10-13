@@ -5,14 +5,14 @@ if (isset($_POST['action'])) {
     $WHPO = $conn->db_conn_whpo(); //* Physical Security Database connection
     $ITHardwareIssue = new ITHarwareIssued();
     $action = trim($_POST['action']);
-    
+
     switch ($action) {
         case 'loadTableHardwareIssuance':
             $search = $_POST['search']['value'];
             $filterValue = trim($_POST['filterValue']);
             $filterValue = !empty($filterValue) ? $filterValue : "Issued', 'Retrieved', 'Returned', 'Defective";
             $controlno = trim($_POST['controlno']);
-            echo $ITHardwareIssue->loadTableHardwareIssuance( $php_fetch_itasset_api, $filterValue, $controlno, $search);
+            echo $ITHardwareIssue->loadTableHardwareIssuance($php_fetch_itasset_api, $filterValue, $controlno, $search);
             break;
         case 'loadInputData':
             echo $ITHardwareIssue->loadInputData($php_fetch_bannerweb_api, $php_fetch_itasset_api);
@@ -41,6 +41,10 @@ if (isset($_POST['action'])) {
         case 'getDescription':
             $barcode = trim($_POST['barcode']);
             echo $ITHardwareIssue->getDescription($WHPO, $barcode);
+            break;
+        case 'getItemControlNumber':
+            $item = trim($_POST['item']);
+            echo $ITHardwareIssue->getItemControlNumber($php_fetch_itasset_api, $item);
             break;
     }
 }
