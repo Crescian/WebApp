@@ -121,23 +121,30 @@ class ITRsmMonitoring
         $result_total_record = $result_stmt->rowCount();
         $result_stmt_res = $result_stmt->fetchAll();
         if ($result_total_record > 0) {
+            $count = 0;
             foreach ($result_stmt_res as $row) {
-                $itemData_List['ongoing'] =  $row['count'];
+                $count +=1;
             }
+            $itemData_List['ongoing'] =  $count;
         }
-        $sqlstringFinished = "SELECT COUNT(*) as count FROM rsmdetail LEFT JOIN prdetail ON prdetail.rsmno = rsmdetail.rsmnumber AND rsmdetail.code = prdetail.code
-                        LEFT JOIN podetail ON podetail.prnumber = prdetail.prnumber AND podetail.code = prdetail.code 
-                        LEFT JOIN rsmheader ON rsmheader.rsmnumber = rsmdetail.rsmnumber 
-                        WHERE department = 'Information Technology' AND prdetail.prnumber is NOT null 
-                        AND dateprepared > '2023-01-01' AND rsmdetail.closed = 'false';";
+        $sqlstringFinished = "SELECT COUNT(*) as count from rsmdetail 
+            inner join rsmheader on rsmheader.rsmnumber = rsmdetail.rsmnumber
+            left join (Select reference, code, quantity From issuancehead 
+            inner join issuancedetail on issuancedetail.issuedno = issuancehead.issuanceno
+            ) as issuance on issuance.reference = rsmdetail.rsmnumber and issuance.code = rsmdetail.code
+            where substr(rsmdetail.code,1,2) in ('IT', 'CE') and date_part('Year',dateprepared) = date_part('Year',current_date) and closed = false
+            group by rsmdetail.rsmnumber,rsmheader.rsmnumber,rsmdetail.description,rsmdetail.purchasemeasure,rsmdetail.remarks, rsmdetail.code, rsmquantity,rsmheader.dateprepared
+            having rsmquantity = sum(case when quantity isnull then 0 else quantity end);";
         $result_stmt = $WHPO->prepare($sqlstringFinished);
         $result_stmt->execute();
         $result_total_record = $result_stmt->rowCount();
         $result_stmt_res = $result_stmt->fetchAll();
         if ($result_total_record > 0) {
+            $count = 0;
             foreach ($result_stmt_res as $row) {
-                $itemData_List['finished'] =  $row['count'];
+                $count += 1;
             }
+            $itemData_List['finished'] =  $count;
         }
         return json_encode($itemData_List);
     }
