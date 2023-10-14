@@ -31,24 +31,30 @@ class ITRsmMonitoring
         //* =========== Fetch Total Record Data ===========
         switch ($statusVal) {
             case 'All':
-                $sqlstring = "SELECT rsmheader.rsmnumber,rsmdetail.code,rsmdetail.description,rsmquantity,rsmdetail.purchasemeasure,rsmdetail.remarks FROM rsmdetail LEFT JOIN prdetail ON prdetail.rsmno = rsmdetail.rsmnumber AND rsmdetail.code = prdetail.code
+                $sqlstring = "SELECT rsmheader.rsmnumber,rsmdetail.code,rsmdetail.description,rsmquantity,rsmdetail.purchasemeasure,rsmdetail.remarks,dateprepared FROM rsmdetail LEFT JOIN prdetail ON prdetail.rsmno = rsmdetail.rsmnumber AND rsmdetail.code = prdetail.code
                         LEFT JOIN podetail ON podetail.prnumber = prdetail.prnumber AND podetail.code = prdetail.code 
                         LEFT JOIN rsmheader ON rsmheader.rsmnumber = rsmdetail.rsmnumber 
-                        WHERE department = 'Information Technology' AND dateprepared > '2023-01-01'";
+                        WHERE department = 'Information Technology'";
                 break;
             case 'Ongoing':
-                $sqlstring = "SELECT rsmheader.rsmnumber,rsmdetail.code,rsmdetail.description,rsmquantity,rsmdetail.purchasemeasure,rsmdetail.remarks FROM rsmdetail LEFT JOIN prdetail ON prdetail.rsmno = rsmdetail.rsmnumber AND rsmdetail.code = prdetail.code
-                        LEFT JOIN podetail ON podetail.prnumber = prdetail.prnumber AND podetail.code = prdetail.code 
-                        LEFT JOIN rsmheader ON rsmheader.rsmnumber = rsmdetail.rsmnumber 
-                        WHERE department = 'Information Technology' AND prdetail.prnumber is null 
-                        AND dateprepared > '2023-01-01' AND rsmdetail.closed = 'true'";
+                $sqlstring = "SELECT rsmheader.rsmnumber,rsmdetail.code,rsmdetail.description,rsmquantity,rsmdetail.purchasemeasure,rsmdetail.remarks,dateprepared from rsmdetail 
+                            inner join rsmheader on rsmheader.rsmnumber = rsmdetail.rsmnumber
+                            left join (Select reference, code, quantity From issuancehead 
+                            inner join issuancedetail on issuancedetail.issuedno = issuancehead.issuanceno
+                            ) as issuance on issuance.reference = rsmdetail.rsmnumber and issuance.code = rsmdetail.code
+                            where substr(rsmdetail.code,1,2) in ('IT', 'CE') and dateprepared >= '2023-01-01' and closed = false
+                            group by rsmdetail.rsmnumber,rsmheader.rsmnumber,rsmdetail.description,rsmdetail.purchasemeasure,rsmdetail.remarks, rsmdetail.code, rsmquantity,rsmheader.dateprepared
+                            having rsmquantity > sum(case when quantity isnull then 0 else quantity end)";
                 break;
-            case 'Finished':
-                $sqlstring = "SELECT rsmheader.rsmnumber,rsmdetail.code,rsmdetail.description,rsmquantity,rsmdetail.purchasemeasure,rsmdetail.remarks FROM rsmdetail LEFT JOIN prdetail ON prdetail.rsmno = rsmdetail.rsmnumber AND rsmdetail.code = prdetail.code
-                        LEFT JOIN podetail ON podetail.prnumber = prdetail.prnumber AND podetail.code = prdetail.code 
-                        LEFT JOIN rsmheader ON rsmheader.rsmnumber = rsmdetail.rsmnumber 
-                        WHERE department = 'Information Technology' AND prdetail.prnumber is NOT null 
-                        AND dateprepared > '2023-01-01' AND rsmdetail.closed = 'false'";
+            case 'Finished':  
+                $sqlstring = "SELECT rsmheader.rsmnumber,rsmdetail.code,rsmdetail.description,rsmquantity,rsmdetail.purchasemeasure,rsmdetail.remarks,dateprepared from rsmdetail 
+                        inner join rsmheader on rsmheader.rsmnumber = rsmdetail.rsmnumber
+                        left join (Select reference, code, quantity From issuancehead 
+                        inner join issuancedetail on issuancedetail.issuedno = issuancehead.issuanceno
+                        ) as issuance on issuance.reference = rsmdetail.rsmnumber and issuance.code = rsmdetail.code
+                        where substr(rsmdetail.code,1,2) in ('IT', 'CE') and date_part('Year',dateprepared) = date_part('Year',current_date) and closed = false
+                        group by rsmdetail.rsmnumber,rsmheader.rsmnumber,rsmdetail.description,rsmdetail.purchasemeasure,rsmdetail.remarks, rsmdetail.code, rsmquantity,rsmheader.dateprepared
+                        having rsmquantity = sum(case when quantity isnull then 0 else quantity end)";
                 break;
         }
         $result_stmt = $WHPO->prepare($sqlstring);
@@ -57,7 +63,7 @@ class ITRsmMonitoring
         // //* =========== Fetch Total Filtered Record Data ===========
         if (!empty($searchValue)) {
             $sqlstring .= " AND (rsmheader.rsmnumber ILIKE '%{$searchValue}%' OR rsmdetail.code ILIKE '%{$searchValue}%' OR rsmdetail.description ILIKE '%{$searchValue}%' OR CAST(rsmquantity AS TEXT) ILIKE '%{$searchValue}%' 
-                OR rsmdetail.purchasemeasure ILIKE '%{$searchValue}%' OR rsmdetail.remarks ILIKE '%{$searchValue}%')";
+                OR rsmdetail.purchasemeasure ILIKE '%{$searchValue}%' OR rsmdetail.remarks ILIKE '%{$searchValue}%' OR CAST(dateprepared AS TEXT) ILIKE '%{$searchValue}%')";
             $result_stmt = $WHPO->prepare($sqlstring);
             $result_stmt->execute();
         }
@@ -69,6 +75,7 @@ class ITRsmMonitoring
         while ($row = $result_stmt->fetch(PDO::FETCH_ASSOC)) {
             $itemData_List[] = array(
                 $row['rsmnumber'],
+                $row['dateprepared'],
                 $row['code'] == '' ? '-' : $row['code'],
                 $row['description'],
                 $row['rsmquantity'],
@@ -91,7 +98,7 @@ class ITRsmMonitoring
         $sqlstringAll = "SELECT COUNT(*) as count FROM rsmdetail LEFT JOIN prdetail ON prdetail.rsmno = rsmdetail.rsmnumber AND rsmdetail.code = prdetail.code
                         LEFT JOIN podetail ON podetail.prnumber = prdetail.prnumber AND podetail.code = prdetail.code 
                         LEFT JOIN rsmheader ON rsmheader.rsmnumber = rsmdetail.rsmnumber 
-                        WHERE department = 'Information Technology' AND dateprepared > '2023-01-01';";
+                        WHERE department = 'Information Technology';";
         $result_stmt = $WHPO->prepare($sqlstringAll);
         $result_stmt->execute();
         $result_total_record = $result_stmt->rowCount();
@@ -101,11 +108,14 @@ class ITRsmMonitoring
                 $itemData_List['all'] =  $row['count'];
             }
         }
-        $sqlstringOngoing = "SELECT COUNT(*) as count FROM rsmdetail LEFT JOIN prdetail ON prdetail.rsmno = rsmdetail.rsmnumber AND rsmdetail.code = prdetail.code
-                        LEFT JOIN podetail ON podetail.prnumber = prdetail.prnumber AND podetail.code = prdetail.code 
-                        LEFT JOIN rsmheader ON rsmheader.rsmnumber = rsmdetail.rsmnumber 
-                        WHERE department = 'Information Technology' AND prdetail.prnumber is null 
-                        AND dateprepared > '2023-01-01' AND rsmdetail.closed = 'true';";
+        $sqlstringOngoing = "SELECT COUNT(*) as count from rsmdetail 
+                            inner join rsmheader on rsmheader.rsmnumber = rsmdetail.rsmnumber
+                            left join (Select reference, code, quantity From issuancehead 
+                            inner join issuancedetail on issuancedetail.issuedno = issuancehead.issuanceno
+                            ) as issuance on issuance.reference = rsmdetail.rsmnumber and issuance.code = rsmdetail.code
+                            where substr(rsmdetail.code,1,2) in ('IT', 'CE') and dateprepared >= '2023-01-01' and closed = false
+                            group by rsmdetail.rsmnumber,rsmheader.rsmnumber,rsmdetail.description,rsmdetail.purchasemeasure,rsmdetail.remarks, rsmdetail.code, rsmquantity,rsmheader.dateprepared
+                            having rsmquantity > sum(case when quantity isnull then 0 else quantity end);";
         $result_stmt = $WHPO->prepare($sqlstringOngoing);
         $result_stmt->execute();
         $result_total_record = $result_stmt->rowCount();

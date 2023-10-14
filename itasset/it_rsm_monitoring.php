@@ -103,6 +103,7 @@ if (!isset($_GET['app_id'])) {
                             <thead class="customHeaderItAsset">
                                 <tr>
                                     <th class="text-center">RSM NO.</th>
+                                    <th class="text-center">DATE</th>
                                     <th class="text-center">CODE</th>
                                     <th class="text-center">DESCRIPTION</th>
                                     <th class="text-center">RSM QTY</th>
@@ -113,6 +114,7 @@ if (!isset($_GET['app_id'])) {
                             <tfoot class="customHeaderItAsset">
                                 <tr>
                                     <th class="text-center">RSM NO.</th>
+                                    <th class="text-center">DATE</th>
                                     <th class="text-center">CODE</th>
                                     <th class="text-center">DESCRIPTION</th>
                                     <th class="text-center">RSM QTY</th>
@@ -127,6 +129,7 @@ if (!isset($_GET['app_id'])) {
                             <thead class="customHeaderItAsset">
                                 <tr>
                                     <th class="text-center">RSM NO.</th>
+                                    <th class="text-center">DATE</th>
                                     <th class="text-center">CODE</th>
                                     <th class="text-center">DESCRIPTION</th>
                                     <th class="text-center">RSM QTY</th>
@@ -137,6 +140,7 @@ if (!isset($_GET['app_id'])) {
                             <tfoot class="customHeaderItAsset">
                                 <tr>
                                     <th class="text-center">RSM NO.</th>
+                                    <th class="text-center">DATE</th>
                                     <th class="text-center">CODE</th>
                                     <th class="text-center">DESCRIPTION</th>
                                     <th class="text-center">RSM QTY</th>
@@ -151,6 +155,7 @@ if (!isset($_GET['app_id'])) {
                             <thead class="customHeaderItAsset">
                                 <tr>
                                     <th class="text-center">RSM NO.</th>
+                                    <th class="text-center">DATE</th>
                                     <th class="text-center">CODE</th>
                                     <th class="text-center">DESCRIPTION</th>
                                     <th class="text-center">RSM QTY</th>
@@ -161,6 +166,7 @@ if (!isset($_GET['app_id'])) {
                             <tfoot class="customHeaderItAsset">
                                 <tr>
                                     <th class="text-center">RSM NO.</th>
+                                    <th class="text-center">DATE</th>
                                     <th class="text-center">CODE</th>
                                     <th class="text-center">DESCRIPTION</th>
                                     <th class="text-center">RSM QTY</th>
@@ -261,7 +267,13 @@ if (!isset($_GET['app_id'])) {
     loadTableNavigation('All')
     loadRsmCount();
 
+
     function loadTableNavigation(statusVal) {
+        if (statusVal == 'All') {
+            $('#filter').show();
+        } else {
+            $('#filter').hide();
+        }
         $('#active_request').text(`${activeRequestList[statusVal] ?? 'All'} Request`);
         switch (statusVal) {
             case 'All':
@@ -307,13 +319,17 @@ if (!isset($_GET['app_id'])) {
                 className: 'dt-body-middle-center',
                 width: '15%'
             }, {
-                targets: [3, 4],
+                targets: 1,
+                className: 'dt-body-middle-center',
+                width: '15%'
+            }, {
+                targets: [4, 5],
                 className: 'dt-body-middle-center',
                 width: '5%'
             }, {
-                targets: [1, 2, 5],
+                targets: [2, 3, 6],
                 className: 'dt-body-middle-left',
-                width: '26.6%'
+                width: '21.6%'
             }]
         });
         inTable.on('draw', function() {
@@ -350,5 +366,6 @@ if (!isset($_GET['app_id'])) {
     function clearValues() {
         $('input').val('');
         $('textarea').val('');
+        $('#filterModal').modal('hide');
     }
 </script>
